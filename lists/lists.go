@@ -45,3 +45,20 @@ func ElementAt(list []int, index int) (int, error) {
 func MyLength(list []int) int {
 	return len(list)
 }
+
+func MyReverse(list []int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, ErrEmptyList
+	}
+
+	reversedList := make([]int, length)
+	copy(reversedList, list)
+
+	for i, j := 0, length-1; i < j; i, j = i+1, j-1 {
+		reversedList[i], reversedList[j] = reversedList[j], reversedList[i]
+	}
+
+	return reversedList, nil
+}

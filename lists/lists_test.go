@@ -150,3 +150,37 @@ func TestMyLength_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedMyLength, actualMyLength)
 	}
 }
+
+func TestMyReverse(t *testing.T) {
+	list := []int{1, 2, 3}
+
+	expectedMyReverse := []int{3, 2, 1}
+	var expectedErr error
+
+	actualMyReverse, actualErr := MyReverse(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedMyReverse, actualMyReverse) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedMyReverse, actualMyReverse)
+	}
+}
+
+func TestMyReverse_EmptyList(t *testing.T) {
+	list := []int{}
+
+	expectedMyReverse := []int{}
+	expectedErr := ErrEmptyList
+
+	actualMyReverse, actualErr := MyReverse(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedMyReverse, actualMyReverse) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedMyReverse, actualMyReverse)
+	}
+}
