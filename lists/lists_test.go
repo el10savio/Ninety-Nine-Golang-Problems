@@ -72,3 +72,57 @@ func TestMyButLast_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedMyButLast, actualMyButLast)
 	}
 }
+
+func TestElementAt(t *testing.T) {
+	list := []int{1, 2, 3}
+	index := 2
+
+	expectedElementAt := 3
+	var expectedErr error
+
+	actualElementAt, actualErr := ElementAt(list, index)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedElementAt, actualElementAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedElementAt, actualElementAt)
+	}
+}
+
+func TestElementAt_EmptyList(t *testing.T) {
+	list := []int{}
+	index := 2
+
+	expectedElementAt := 0
+	expectedErr := ErrEmptyList
+
+	actualElementAt, actualErr := ElementAt(list, index)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedElementAt, actualElementAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedElementAt, actualElementAt)
+	}
+}
+
+func TestElementAt_NegativeIndex(t *testing.T) {
+	list := []int{1, 2, 3}
+	index := -2
+
+	expectedElementAt := 0
+	expectedErr := ErrNegativeIndex
+
+	actualElementAt, actualErr := ElementAt(list, index)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedElementAt, actualElementAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedElementAt, actualElementAt)
+	}
+}
