@@ -74,3 +74,18 @@ func IsPalindrome(list []int) (bool, error) {
 
 	return reflect.DeepEqual(list, reversedList), nil
 }
+
+func Flatten(compositeList []interface{}) []int {
+	var list []int
+
+	for _, element := range compositeList {
+		switch i := element.(type) {
+		case int:
+			list = append(list, i)
+		case []interface{}:
+			list = append(list, Flatten(i)...)
+		}
+	}
+
+	return list
+}

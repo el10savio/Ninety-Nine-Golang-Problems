@@ -235,3 +235,39 @@ func TestIsPalindrome_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedIsPalindrome, actualIsPalindrome)
 	}
 }
+
+func TestFlatten(t *testing.T) {
+	list := []interface{}{[]interface{}{1, []interface{}{2, []interface{}{3, 4}, 5}}}
+
+	expectedFlatten := []int{1, 2, 3, 4, 5}
+
+	actualFlatten := Flatten(list)
+
+	if !reflect.DeepEqual(expectedFlatten, actualFlatten) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedFlatten, actualFlatten)
+	}
+}
+
+func TestFlatten_FlatList(t *testing.T) {
+	list := []interface{}{5}
+
+	expectedFlatten := []int{5}
+
+	actualFlatten := Flatten(list)
+
+	if !reflect.DeepEqual(expectedFlatten, actualFlatten) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedFlatten, actualFlatten)
+	}
+}
+
+func TestFlatten_EmptyList(t *testing.T) {
+	var list []interface{}
+
+	var expectedFlatten []int
+
+	actualFlatten := Flatten(list)
+
+	if !reflect.DeepEqual(expectedFlatten, actualFlatten) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedFlatten, actualFlatten)
+	}
+}
