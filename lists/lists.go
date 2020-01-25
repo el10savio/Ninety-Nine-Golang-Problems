@@ -1,6 +1,9 @@
 package lists
 
-import "errors"
+import (
+	"errors"
+	"reflect"
+)
 
 var (
 	ErrEmptyList     = errors.New("Empty List")
@@ -61,4 +64,13 @@ func MyReverse(list []int) ([]int, error) {
 	}
 
 	return reversedList, nil
+}
+
+func IsPalindrome(list []int) (bool, error) {
+	reversedList, err := MyReverse(list)
+	if err != nil {
+		return false, err
+	}
+
+	return reflect.DeepEqual(list, reversedList), nil
 }
