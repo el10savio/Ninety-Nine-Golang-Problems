@@ -126,3 +126,27 @@ func TestElementAt_NegativeIndex(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedElementAt, actualElementAt)
 	}
 }
+
+func TestMyLength(t *testing.T) {
+	list := []int{1, 2, 3}
+
+	expectedMyLength := 3
+
+	actualMyLength := MyLength(list)
+
+	if !reflect.DeepEqual(expectedMyLength, actualMyLength) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedMyLength, actualMyLength)
+	}
+}
+
+func TestMyLength_EmptyList(t *testing.T) {
+	list := []int{}
+
+	expectedMyLength := 0
+
+	actualMyLength := MyLength(list)
+
+	if !reflect.DeepEqual(expectedMyLength, actualMyLength) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedMyLength, actualMyLength)
+	}
+}

@@ -41,3 +41,7 @@ func ElementAt(list []int, index int) (int, error) {
 
 	return list[index], nil
 }
+
+func MyLength(list []int) int {
+	return len(list)
+}
