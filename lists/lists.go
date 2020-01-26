@@ -20,8 +20,8 @@ var (
 // RLE is the type used in
 // Encode(list []string) ([]RLE, error)
 type RLE struct {
-	count int
-	value string
+	Count int
+	Value string
 }
 
 // MyLast Problem 1
@@ -184,7 +184,7 @@ func Encode(list []string) ([]RLE, error) {
 	encoded := make([]RLE, 0)
 
 	for _, element := range packed {
-		encoded = append(encoded, RLE{count: len(element), value: string(element[0])})
+		encoded = append(encoded, RLE{Count: len(element), Value: string(element[0])})
 	}
 
 	return encoded, nil
