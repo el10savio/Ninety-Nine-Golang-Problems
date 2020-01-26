@@ -77,7 +77,7 @@ func TestElementAt(t *testing.T) {
 	list := []int{1, 2, 3}
 	index := 2
 
-	expectedElementAt := 3
+	expectedElementAt := 2
 	var expectedErr error
 
 	actualElementAt, actualErr := ElementAt(list, index)

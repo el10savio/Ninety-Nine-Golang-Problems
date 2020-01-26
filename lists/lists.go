@@ -7,11 +7,25 @@ import (
 )
 
 var (
-	ErrEmptyList     = errors.New("Empty List")
-	ErrAtLeastTwo    = errors.New("List Needs At Least Two Elements")
-	ErrNegativeIndex = errors.New("List Index Cannot Be Negative")
+	// ErrEmptyList - Error for empty list
+	ErrEmptyList = errors.New("empty list")
+
+	// ErrAtLeastTwo - Error for list needs at least two elements
+	ErrAtLeastTwo = errors.New("list needs at least two elements")
+
+	// ErrNegativeIndex - Error for list index cannot be negative
+	ErrNegativeIndex = errors.New("list index cannot be negative")
 )
 
+// RLE is the type used in
+// Encode(list []string) ([]RLE, error)
+type RLE struct {
+	count int
+	value string
+}
+
+// MyLast Problem 1
+// Find the last element of a list.
 func MyLast(list []int) (int, error) {
 	length := len(list)
 
@@ -22,6 +36,8 @@ func MyLast(list []int) (int, error) {
 	return list[len(list)-1], nil
 }
 
+// MyButLast Problem 2
+// Find the last but one element of a list.
 func MyButLast(list []int) (int, error) {
 	length := len(list)
 
@@ -32,6 +48,9 @@ func MyButLast(list []int) (int, error) {
 	return list[len(list)-2], nil
 }
 
+// ElementAt Problem 3
+// Find the K'th element of a list.
+// The first element in the list is index 1.
 func ElementAt(list []int, index int) (int, error) {
 	length := len(list)
 
@@ -43,13 +62,18 @@ func ElementAt(list []int, index int) (int, error) {
 		return 0, ErrNegativeIndex
 	}
 
+	index--
 	return list[index], nil
 }
 
+// MyLength Problem 4
+// Find the number of elements of a list.
 func MyLength(list []int) int {
 	return len(list)
 }
 
+// MyReverse Problem 5
+// Reverse a list.
 func MyReverse(list []int) ([]int, error) {
 	length := len(list)
 
@@ -67,6 +91,9 @@ func MyReverse(list []int) ([]int, error) {
 	return reversedList, nil
 }
 
+// IsPalindrome Problem 6
+// Find out whether a list is a palindrome.
+// A palindrome can be read forward or backward;
 func IsPalindrome(list []int) (bool, error) {
 	reversedList, err := MyReverse(list)
 	if err != nil {
@@ -76,6 +103,8 @@ func IsPalindrome(list []int) (bool, error) {
 	return reflect.DeepEqual(list, reversedList), nil
 }
 
+// Flatten Problem 7
+// Flatten a nested list structure.
 func Flatten(compositeList []interface{}) []int {
 	var list []int
 
@@ -91,6 +120,8 @@ func Flatten(compositeList []interface{}) []int {
 	return list
 }
 
+// Compress Problem 8
+// Eliminate consecutive duplicates of list elements.
 func Compress(list []string) ([]string, error) {
 	length := len(list)
 
@@ -112,6 +143,9 @@ func Compress(list []string) ([]string, error) {
 	return compressed, nil
 }
 
+// Pack Problem 9
+// Pack consecutive duplicates of list elements into sublists.
+// If a list contains repeated elements they should be placed in separate sublists.
 func Pack(list []string) ([]string, error) {
 	length := len(list)
 
@@ -143,11 +177,8 @@ func Pack(list []string) ([]string, error) {
 	return compressed, nil
 }
 
-type RLE struct {
-	count int
-	value string
-}
-
+// Encode Problem 10
+// Run-length encoding of a list.
 func Encode(list []string) ([]RLE, error) {
 	packed, err := Pack(list)
 	if err != nil {
