@@ -89,3 +89,24 @@ func Flatten(compositeList []interface{}) []int {
 
 	return list
 }
+
+func Compress(list []string) ([]string, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []string{}, ErrEmptyList
+	}
+
+	present := make(map[string]bool)
+	compressed := make([]string, 0)
+
+	for _, element := range list {
+		if !present[element] {
+			present = make(map[string]bool)
+			compressed = append(compressed, element)
+			present[element] = true
+		}
+	}
+
+	return compressed, nil
+}

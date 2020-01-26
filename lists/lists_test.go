@@ -271,3 +271,37 @@ func TestFlatten_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedFlatten, actualFlatten)
 	}
 }
+
+func TestCompress(t *testing.T) {
+	list := []string{"a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"}
+
+	expectedCompress := []string{"a", "b", "c", "a", "d", "e"}
+	var expectedErr error
+
+	actualCompress, actualErr := Compress(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCompress, actualCompress) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCompress, actualCompress)
+	}
+}
+
+func TestCompress_EmptyList(t *testing.T) {
+	list := []string{}
+
+	expectedCompress := []string{}
+	expectedErr := ErrEmptyList
+
+	actualCompress, actualErr := Compress(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCompress, actualCompress) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCompress, actualCompress)
+	}
+}
