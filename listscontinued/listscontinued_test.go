@@ -74,3 +74,91 @@ func TestDecodeModified_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedDecodeModified, actualDecodeModified)
 	}
 }
+
+func TestDupli(t *testing.T) {
+	list := []int{1, 2, 3}
+
+	expectedDupli := []int{1, 1, 2, 2, 3, 3}
+	var expectedErr error
+
+	actualDupli, actualErr := Dupli(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDupli, actualDupli) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDupli, actualDupli)
+	}
+}
+
+func TestDupli_EmptyList(t *testing.T) {
+	list := []int{}
+
+	expectedDupli := []int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualDupli, actualErr := Dupli(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDupli, actualDupli) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDupli, actualDupli)
+	}
+}
+
+func TestRepli(t *testing.T) {
+	list := []int{1, 2, 3}
+	factor := 3
+
+	expectedRepli := []int{1, 1, 1, 2, 2, 2, 3, 3, 3}
+	var expectedErr error
+
+	actualRepli, actualErr := Repli(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRepli, actualRepli) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRepli, actualRepli)
+	}
+}
+
+func TestRepli_ZeroFactor(t *testing.T) {
+	list := []int{1, 2, 3}
+	factor := 0
+
+	expectedRepli := []int{}
+	expectedErr := ErrNotPositiveNumber
+
+	actualRepli, actualErr := Repli(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRepli, actualRepli) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRepli, actualRepli)
+	}
+}
+
+func TestRepli_NegativeFactor(t *testing.T) {
+	list := []int{1, 2, 3}
+	factor := -3
+
+	expectedRepli := []int{}
+	expectedErr := ErrNotPositiveNumber
+
+	actualRepli, actualErr := Repli(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRepli, actualRepli) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRepli, actualRepli)
+	}
+}

@@ -1,7 +1,14 @@
 package listscontinued
 
 import (
+	"errors"
+
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/lists"
+)
+
+var (
+	// ErrNotPositiveNumber - Error for factor cannot be 0 or negative
+	ErrNotPositiveNumber = errors.New("factor cannot be 0 or negative")
 )
 
 // Can't get it to omit struct value if not present
@@ -39,4 +46,40 @@ func DecodeModified(rleList []lists.RLE) ([]string, error) {
 	}
 
 	return decoded, nil
+}
+
+// Problem 13 Not Solved
+
+func Dupli(list []int) ([]int, error) {
+	if len(list) < 1 {
+		return []int{}, lists.ErrEmptyList
+	}
+
+	duplicated := make([]int, 0)
+
+	for _, element := range list {
+		duplicated = append(duplicated, element, element)
+	}
+
+	return duplicated, nil
+}
+
+func Repli(list []int, factor int) ([]int, error) {
+	if len(list) < 1 {
+		return []int{}, lists.ErrEmptyList
+	}
+
+	if factor < 1 {
+		return []int{}, ErrNotPositiveNumber
+	}
+
+	duplicated := make([]int, 0)
+
+	for _, element := range list {
+		for index := 0; index < factor; index++ {
+			duplicated = append(duplicated, element)
+		}
+	}
+
+	return duplicated, nil
 }
