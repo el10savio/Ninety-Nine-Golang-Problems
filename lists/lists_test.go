@@ -339,3 +339,37 @@ func TestPack_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedPack, actualPack)
 	}
 }
+
+func TestEncode(t *testing.T) {
+	list := []string{"a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"}
+
+	expectedEncode := []RLE{{4, "a"}, {1, "b"}, {2, "c"}, {2, "a"}, {1, "d"}, {4, "e"}}
+	var expectedErr error
+
+	actualEncode, actualErr := Encode(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedEncode, actualEncode) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedEncode, actualEncode)
+	}
+}
+
+func TestEncode_EmptyList(t *testing.T) {
+	list := []string{}
+
+	expectedEncode := []RLE{}
+	expectedErr := ErrEmptyList
+
+	actualEncode, actualErr := Encode(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedEncode, actualEncode) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedEncode, actualEncode)
+	}
+}

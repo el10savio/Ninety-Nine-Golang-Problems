@@ -142,3 +142,23 @@ func Pack(list []string) ([]string, error) {
 
 	return compressed, nil
 }
+
+type RLE struct {
+	count int
+	value string
+}
+
+func Encode(list []string) ([]RLE, error) {
+	packed, err := Pack(list)
+	if err != nil {
+		return []RLE{}, ErrEmptyList
+	}
+
+	encoded := make([]RLE, 0)
+
+	for _, element := range packed {
+		encoded = append(encoded, RLE{count: len(element), value: string(element[0])})
+	}
+
+	return encoded, nil
+}
