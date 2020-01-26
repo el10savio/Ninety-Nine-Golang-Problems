@@ -33,7 +33,7 @@ func MyLast(list []int) (int, error) {
 		return 0, ErrEmptyList
 	}
 
-	return list[len(list)-1], nil
+	return list[length-1], nil
 }
 
 // MyButLast Problem 2
@@ -41,20 +41,18 @@ func MyLast(list []int) (int, error) {
 func MyButLast(list []int) (int, error) {
 	length := len(list)
 
-	if length <= 2 {
+	if length < 2 {
 		return 0, ErrAtLeastTwo
 	}
 
-	return list[len(list)-2], nil
+	return list[length-2], nil
 }
 
 // ElementAt Problem 3
 // Find the K'th element of a list.
 // The first element in the list is index 1.
 func ElementAt(list []int, index int) (int, error) {
-	length := len(list)
-
-	if length < 1 {
+	if len(list) < 1 {
 		return 0, ErrEmptyList
 	}
 
@@ -123,9 +121,7 @@ func Flatten(compositeList []interface{}) []int {
 // Compress Problem 8
 // Eliminate consecutive duplicates of list elements.
 func Compress(list []string) ([]string, error) {
-	length := len(list)
-
-	if length < 1 {
+	if len(list) < 1 {
 		return []string{}, ErrEmptyList
 	}
 
