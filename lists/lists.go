@@ -2,6 +2,7 @@ package lists
 
 import (
 	"errors"
+	"fmt"
 	"reflect"
 )
 
@@ -103,10 +104,41 @@ func Compress(list []string) ([]string, error) {
 	for _, element := range list {
 		if !present[element] {
 			present = make(map[string]bool)
-			compressed = append(compressed, element)
 			present[element] = true
+			compressed = append(compressed, element)
 		}
 	}
+
+	return compressed, nil
+}
+
+func Pack(list []string) ([]string, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []string{}, ErrEmptyList
+	}
+
+	present := make(map[string]bool)
+	compressed := make([]string, 0)
+
+	joined := list[0]
+	present[joined] = true
+
+	for index := 1; index < length; index++ {
+		element := list[index]
+
+		if !present[element] {
+			compressed = append(compressed, joined)
+			present = make(map[string]bool)
+			joined = element
+		} else {
+			joined = fmt.Sprintf("%s%s", joined, element)
+		}
+
+		present[element] = true
+	}
+	compressed = append(compressed, joined)
 
 	return compressed, nil
 }

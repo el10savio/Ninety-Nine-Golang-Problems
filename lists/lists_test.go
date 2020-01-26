@@ -305,3 +305,37 @@ func TestCompress_EmptyList(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedCompress, actualCompress)
 	}
 }
+
+func TestPack(t *testing.T) {
+	list := []string{"a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"}
+
+	expectedPack := []string{"aaaa", "b", "cc", "aa", "d", "eeee"}
+	var expectedErr error
+
+	actualPack, actualErr := Pack(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPack, actualPack) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedPack, actualPack)
+	}
+}
+
+func TestPack_EmptyList(t *testing.T) {
+	list := []string{}
+
+	expectedPack := []string{}
+	expectedErr := ErrEmptyList
+
+	actualPack, actualErr := Pack(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPack, actualPack) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedPack, actualPack)
+	}
+}
