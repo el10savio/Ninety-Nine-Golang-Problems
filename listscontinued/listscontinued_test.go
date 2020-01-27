@@ -127,6 +127,24 @@ func TestRepli(t *testing.T) {
 	}
 }
 
+func TestRepli_EmptyList(t *testing.T) {
+	list := []int{}
+	factor := 3
+
+	expectedRepli := []int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualRepli, actualErr := Repli(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRepli, actualRepli) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRepli, actualRepli)
+	}
+}
+
 func TestRepli_ZeroFactor(t *testing.T) {
 	list := []int{1, 2, 3}
 	factor := 0
@@ -160,5 +178,77 @@ func TestRepli_NegativeFactor(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedRepli, actualRepli) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedRepli, actualRepli)
+	}
+}
+
+func TestDropEvery(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	factor := 3
+
+	expectedDropEvery := []int{1, 2, 4, 5, 7, 8, 10}
+	var expectedErr error
+
+	actualDropEvery, actualErr := DropEvery(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDropEvery, actualDropEvery) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDropEvery, actualDropEvery)
+	}
+}
+
+func TestDropEvery_EmptyList(t *testing.T) {
+	list := []int{}
+	factor := 3
+
+	expectedDropEvery := []int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualDropEvery, actualErr := DropEvery(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDropEvery, actualDropEvery) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDropEvery, actualDropEvery)
+	}
+}
+
+func TestDropEvery_ZeroFactor(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	factor := 0
+
+	expectedDropEvery := []int{}
+	expectedErr := ErrNotPositiveNumber
+
+	actualDropEvery, actualErr := DropEvery(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDropEvery, actualDropEvery) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDropEvery, actualDropEvery)
+	}
+}
+
+func TestDropEvery_NegativeFactor(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	factor := -3
+
+	expectedDropEvery := []int{}
+	expectedErr := ErrNotPositiveNumber
+
+	actualDropEvery, actualErr := DropEvery(list, factor)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDropEvery, actualDropEvery) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDropEvery, actualDropEvery)
 	}
 }

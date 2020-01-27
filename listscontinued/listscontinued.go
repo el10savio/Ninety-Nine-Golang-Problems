@@ -83,3 +83,25 @@ func Repli(list []int, factor int) ([]int, error) {
 
 	return duplicated, nil
 }
+
+func DropEvery(list []int, factor int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, lists.ErrEmptyList
+	}
+
+	if factor < 1 {
+		return []int{}, ErrNotPositiveNumber
+	}
+
+	dropped := make([]int, 0)
+
+	for index := 0; index < length; index++ {
+		if (index+1)%factor != 0 {
+			dropped = append(dropped, list[index])
+		}
+	}
+
+	return dropped, nil
+}
