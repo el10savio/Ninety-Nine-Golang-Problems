@@ -127,3 +127,24 @@ func Split(list []int, splitPoint int) ([][]int, error) {
 
 	return divided, nil
 }
+
+func Slice(list []int, startIndex int, endIndex int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, lists.ErrEmptyList
+	}
+
+	if startIndex <= 0 || startIndex > length {
+		return []int{}, ErrIndexOutOfRange
+	}
+
+	if endIndex <= 0 || endIndex > length {
+		return []int{}, ErrIndexOutOfRange
+	}
+
+	extract := make([]int, 0)
+	extract = list[startIndex-1:endIndex]
+
+	return extract, nil
+}

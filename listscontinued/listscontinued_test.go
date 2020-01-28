@@ -342,3 +342,75 @@ func TestSplit_ZeroSplitPoint(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedSplit, actualSplit)
 	}
 }
+
+func TestSlice(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	startIndex, endIndex := 3, 7
+
+	expectedSlice := []int{3, 4, 5, 6, 7}
+	var expectedErr error
+
+	actualSlice, actualErr := Slice(list, startIndex, endIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSlice, actualSlice) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSlice, actualSlice)
+	}
+}
+
+func TestSlice_EmptyList(t *testing.T) {
+	list := []int{}
+	startIndex, endIndex := 3, 7
+
+	expectedSlice := []int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualSlice, actualErr := Slice(list, startIndex, endIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSlice, actualSlice) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSlice, actualSlice)
+	}
+}
+
+func TestSlice_OutOfBoundsStartIndex(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	startIndex, endIndex := -3, 7
+
+	expectedSlice := []int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualSlice, actualErr := Slice(list, startIndex, endIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSlice, actualSlice) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSlice, actualSlice)
+	}
+}
+
+func TestSlice_OutOfBoundsEndIndex(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	startIndex, endIndex := 3, 17
+
+	expectedSlice := []int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualSlice, actualErr := Slice(list, startIndex, endIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSlice, actualSlice) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSlice, actualSlice)
+	}
+}
