@@ -9,6 +9,9 @@ import (
 var (
 	// ErrNotPositiveNumber - Error for factor cannot be 0 or negative
 	ErrNotPositiveNumber = errors.New("factor cannot be 0 or negative")
+
+	// ErrIndexOutOfRange - Error for index out of range
+	ErrIndexOutOfRange = errors.New("index out of range")
 )
 
 // Can't get it to omit struct value if not present
@@ -104,4 +107,23 @@ func DropEvery(list []int, factor int) ([]int, error) {
 	}
 
 	return dropped, nil
+}
+
+func Split(list []int, splitPoint int) ([][]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return [][]int{}, lists.ErrEmptyList
+	}
+
+	if splitPoint <= 0 || splitPoint > length {
+		return [][]int{}, ErrIndexOutOfRange
+	}
+
+	divided := make([][]int, 0)
+
+	divided = append(divided, list[:splitPoint])
+	divided = append(divided, list[splitPoint:])
+
+	return divided, nil
 }

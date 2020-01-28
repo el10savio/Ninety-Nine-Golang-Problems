@@ -252,3 +252,93 @@ func TestDropEvery_NegativeFactor(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedDropEvery, actualDropEvery)
 	}
 }
+
+func TestSplit(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	splitPoint := 3
+
+	expectedSplit := [][]int{{1, 2, 3}, {4, 5, 6, 7, 8, 9, 10}}
+	var expectedErr error
+
+	actualSplit, actualErr := Split(list, splitPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSplit, actualSplit) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSplit, actualSplit)
+	}
+}
+
+func TestSplit_EmptyList(t *testing.T) {
+	list := []int{}
+	splitPoint := 3
+
+	expectedSplit := [][]int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualSplit, actualErr := Split(list, splitPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSplit, actualSplit) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSplit, actualSplit)
+	}
+}
+
+func TestSplit_NegativeSplitPoint(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	splitPoint := -3
+
+	expectedSplit := [][]int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualSplit, actualErr := Split(list, splitPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSplit, actualSplit) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSplit, actualSplit)
+	}
+}
+
+func TestSplit_OutOfRangeSplitPoint(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	splitPoint := 25
+
+	expectedSplit := [][]int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualSplit, actualErr := Split(list, splitPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSplit, actualSplit) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSplit, actualSplit)
+	}
+}
+
+func TestSplit_ZeroSplitPoint(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	splitPoint := 0
+
+	expectedSplit := [][]int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualSplit, actualErr := Split(list, splitPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedSplit, actualSplit) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedSplit, actualSplit)
+	}
+}
