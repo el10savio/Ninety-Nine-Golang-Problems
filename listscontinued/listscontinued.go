@@ -2,6 +2,7 @@ package listscontinued
 
 import (
 	"errors"
+	"math"
 
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/lists"
 )
@@ -144,7 +145,38 @@ func Slice(list []int, startIndex int, endIndex int) ([]int, error) {
 	}
 
 	extract := make([]int, 0)
-	extract = list[startIndex-1:endIndex]
+	extract = list[startIndex-1 : endIndex]
 
 	return extract, nil
+}
+
+func Rotate(list []int, rotationIndex int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, lists.ErrEmptyList
+	}
+
+	if rotationIndex == 0 {
+		return list, nil
+	}
+
+	if int(math.Abs(float64(rotationIndex)))%length == 0 {
+		return list, nil
+	}
+
+	if rotationIndex < 0 {
+		rotationIndex = (length + rotationIndex%length)
+	}
+
+	divided, err := Split(list, rotationIndex)
+	if err != nil {
+		return []int{}, err
+	}
+
+	rotated := make([]int, 0)
+	rotated = append(rotated, divided[1]...)
+	rotated = append(rotated, divided[0]...)
+
+	return rotated, nil
 }

@@ -414,3 +414,96 @@ func TestSlice_OutOfBoundsEndIndex(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedSlice, actualSlice)
 	}
 }
+
+func TestRotate(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	rotationIndex := 3
+
+	expectedRotate := []int{4, 5, 6, 7, 8, 1, 2, 3}
+	var expectedErr error
+
+	actualRotate, actualErr := Rotate(list, rotationIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRotate, actualRotate) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRotate, actualRotate)
+	}
+}
+
+func TestRotate_NegativeRotationIndex(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	rotationIndex := -2
+
+	expectedRotate := []int{7, 8, 1, 2, 3, 4, 5, 6}
+	var expectedErr error
+
+	actualRotate, actualErr := Rotate(list, rotationIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRotate, actualRotate) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRotate, actualRotate)
+	}
+}
+
+func TestRotate_EmptyList(t *testing.T) {
+	list := []int{}
+	rotationIndex := 3
+
+	expectedRotate := []int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualRotate, actualErr := Rotate(list, rotationIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRotate, actualRotate) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRotate, actualRotate)
+	}
+}
+
+func TestRotate_ZeroRotationIndex(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	rotationIndex := 0
+
+	expectedRotate := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	var expectedErr error
+
+	actualRotate, actualErr := Rotate(list, rotationIndex)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRotate, actualRotate) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRotate, actualRotate)
+	}
+}
+
+func TestRotate_RotationIndexMultipleOfLength(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	rotationIndeces := []int{-64, -32, -16, -8, 8, 16, 32, 64}
+
+	expectedRotate := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	var expectedErr error
+
+	for _, rotationIndex := range rotationIndeces {
+		actualRotate, actualErr := Rotate(list, rotationIndex)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedRotate, actualRotate) {
+			t.Fatalf("Expected: %v\n Got: %v\n", expectedRotate, actualRotate)
+		}
+	}
+
+}
