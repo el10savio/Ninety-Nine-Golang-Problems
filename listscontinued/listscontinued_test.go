@@ -507,3 +507,93 @@ func TestRotate_RotationIndexMultipleOfLength(t *testing.T) {
 	}
 
 }
+
+func TestRemoveAt(t *testing.T) {
+	list := []int{1, 2, 3, 4}
+	removalPoint := 2
+
+	expectedRemoveAt := []int{1, 3, 4}
+	var expectedErr error
+
+	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRemoveAt, actualRemoveAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRemoveAt, actualRemoveAt)
+	}
+}
+
+func TestRemoveAt_EmptyList(t *testing.T) {
+	list := []int{}
+	removalPoint := 2
+
+	expectedRemoveAt := []int{}
+	expectedErr := lists.ErrEmptyList
+
+	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRemoveAt, actualRemoveAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRemoveAt, actualRemoveAt)
+	}
+}
+
+func TestRemoveAt_NegativeSplitPoint(t *testing.T) {
+	list := []int{1, 2, 3, 4}
+	removalPoint := -2
+
+	expectedRemoveAt := []int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRemoveAt, actualRemoveAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRemoveAt, actualRemoveAt)
+	}
+}
+
+func TestRemoveAt_OutOfRangeSplitPoint(t *testing.T) {
+	list := []int{1, 2, 3, 4}
+	removalPoint := 20
+
+	expectedRemoveAt := []int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRemoveAt, actualRemoveAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRemoveAt, actualRemoveAt)
+	}
+}
+
+func TestRemoveAt_ZeroSplitPoint(t *testing.T) {
+	list := []int{1, 2, 3, 4}
+	removalPoint := 0
+
+	expectedRemoveAt := []int{}
+	expectedErr := ErrIndexOutOfRange
+
+	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRemoveAt, actualRemoveAt) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRemoveAt, actualRemoveAt)
+	}
+}

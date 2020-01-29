@@ -180,3 +180,24 @@ func Rotate(list []int, rotationIndex int) ([]int, error) {
 
 	return rotated, nil
 }
+
+//TODO: Add comment on 1 based indexing
+
+func RemoveAt(list []int, removalPoint int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, lists.ErrEmptyList
+	}
+
+	removalPoint--
+
+	if removalPoint < 0 || removalPoint > length {
+		return []int{}, ErrIndexOutOfRange
+	}
+
+	removed := make([]int, 0)
+	removed = append(list[:removalPoint], list[removalPoint+1:]...)
+
+	return removed, nil
+}
