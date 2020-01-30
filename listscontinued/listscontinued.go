@@ -144,8 +144,7 @@ func Slice(list []int, startIndex int, endIndex int) ([]int, error) {
 		return []int{}, ErrIndexOutOfRange
 	}
 
-	extract := make([]int, 0)
-	extract = list[startIndex-1 : endIndex]
+	extract := list[startIndex-1 : endIndex]
 
 	return extract, nil
 }
@@ -196,8 +195,7 @@ func RemoveAt(list []int, removalPoint int) ([]int, error) {
 		return []int{}, ErrIndexOutOfRange
 	}
 
-	removed := make([]int, 0)
-	removed = append(list[:removalPoint], list[removalPoint+1:]...)
+	list = append(list[:removalPoint], list[removalPoint+1:]...)
 
-	return removed, nil
+	return list, nil
 }
