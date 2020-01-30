@@ -15,6 +15,8 @@ var (
 	ErrIndexOutOfRange = errors.New("index out of range")
 )
 
+// EncodeModified Problem 11
+// Modified run-length encoding.
 // Can't get it to omit struct value if not present
 func EncodeModified(list []string) ([]lists.RLE, error) {
 	packed, err := lists.Pack(list)
@@ -35,6 +37,8 @@ func EncodeModified(list []string) ([]lists.RLE, error) {
 	return encoded, nil
 }
 
+// DecodeModified Problem 12
+// Decode a run-length encoded list.
 func DecodeModified(rleList []lists.RLE) ([]string, error) {
 	if len(rleList) < 1 {
 		return []string{}, lists.ErrEmptyList
@@ -53,7 +57,10 @@ func DecodeModified(rleList []lists.RLE) ([]string, error) {
 }
 
 // Problem 13 Not Solved
+// Run-length encoding of a list (direct solution).
 
+// Dupli Problem 14
+// Duplicate the elements of a list.
 func Dupli(list []int) ([]int, error) {
 	if len(list) < 1 {
 		return []int{}, lists.ErrEmptyList
@@ -68,6 +75,8 @@ func Dupli(list []int) ([]int, error) {
 	return duplicated, nil
 }
 
+// Repli Problem 15
+// Replicate the elements of a list a given number of times.
 func Repli(list []int, factor int) ([]int, error) {
 	if len(list) < 1 {
 		return []int{}, lists.ErrEmptyList
@@ -88,6 +97,8 @@ func Repli(list []int, factor int) ([]int, error) {
 	return duplicated, nil
 }
 
+// DropEvery Problem 16
+// Drop every N'th element from a list.
 func DropEvery(list []int, factor int) ([]int, error) {
 	length := len(list)
 
@@ -110,6 +121,9 @@ func DropEvery(list []int, factor int) ([]int, error) {
 	return dropped, nil
 }
 
+// Split Problem 17
+// Split a list into two parts;
+// the length of the first part is given.
 func Split(list []int, splitPoint int) ([][]int, error) {
 	length := len(list)
 
@@ -129,6 +143,8 @@ func Split(list []int, splitPoint int) ([][]int, error) {
 	return divided, nil
 }
 
+// Slice Problem 18
+// Extract a slice from a list.
 func Slice(list []int, startIndex int, endIndex int) ([]int, error) {
 	length := len(list)
 
@@ -149,6 +165,8 @@ func Slice(list []int, startIndex int, endIndex int) ([]int, error) {
 	return extract, nil
 }
 
+// Rotate Problem 19
+// Rotate a list N places to the left.
 func Rotate(list []int, rotationIndex int) ([]int, error) {
 	length := len(list)
 
@@ -180,8 +198,8 @@ func Rotate(list []int, rotationIndex int) ([]int, error) {
 	return rotated, nil
 }
 
-//TODO: Add comment on 1 based indexing
-
+// RemoveAt Problem 20
+// Remove the K'th element from a list.
 func RemoveAt(list []int, removalPoint int) ([]int, error) {
 	length := len(list)
 
