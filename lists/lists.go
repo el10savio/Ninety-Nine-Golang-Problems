@@ -6,24 +6,6 @@ import (
 	"reflect"
 )
 
-var (
-	// ErrEmptyList - Error for empty list
-	ErrEmptyList = errors.New("empty list")
-
-	// ErrAtLeastTwo - Error for list needs at least two elements
-	ErrAtLeastTwo = errors.New("list needs at least two elements")
-
-	// ErrNegativeIndex - Error for list index cannot be negative
-	ErrNegativeIndex = errors.New("list index cannot be negative")
-)
-
-// RLE is the type used in
-// Encode(list []string) ([]RLE, error)
-type RLE struct {
-	Count int
-	Value string
-}
-
 // MyLast Problem 1
 // Find the last element of a list.
 func MyLast(list []int) (int, error) {

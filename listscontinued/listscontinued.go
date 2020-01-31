@@ -1,18 +1,9 @@
 package listscontinued
 
 import (
-	"errors"
 	"math"
 
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/lists"
-)
-
-var (
-	// ErrNotPositiveNumber - Error for factor cannot be 0 or negative
-	ErrNotPositiveNumber = errors.New("factor cannot be 0 or negative")
-
-	// ErrIndexOutOfRange - Error for index out of range
-	ErrIndexOutOfRange = errors.New("index out of range")
 )
 
 // EncodeModified Problem 11
