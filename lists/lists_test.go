@@ -3,6 +3,7 @@ package lists
 import (
 	"reflect"
 	"testing"
+	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
 func TestMyLast(t *testing.T) {
@@ -26,7 +27,7 @@ func TestMyLast_EmptyList(t *testing.T) {
 	list := []int{}
 
 	expectedMyLast := 0
-	expectedErr := ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualMyLast, actualErr := MyLast(list)
 
@@ -77,7 +78,7 @@ func TestMyButLast_OneElement(t *testing.T) {
 	list := []int{1}
 
 	expectedMyButLast := 0
-	expectedErr := ErrAtLeastTwo
+	expectedErr := definitions.ErrAtLeastTwo
 
 	actualMyButLast, actualErr := MyButLast(list)
 
@@ -94,7 +95,7 @@ func TestMyButLast_EmptyList(t *testing.T) {
 	list := []int{}
 
 	expectedMyButLast := 0
-	expectedErr := ErrAtLeastTwo
+	expectedErr := definitions.ErrAtLeastTwo
 
 	actualMyButLast, actualErr := MyButLast(list)
 
@@ -130,7 +131,7 @@ func TestElementAt_EmptyList(t *testing.T) {
 	index := 2
 
 	expectedElementAt := 0
-	expectedErr := ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualElementAt, actualErr := ElementAt(list, index)
 
@@ -148,7 +149,7 @@ func TestElementAt_NegativeIndex(t *testing.T) {
 	index := -2
 
 	expectedElementAt := 0
-	expectedErr := ErrNegativeIndex
+	expectedErr := definitions.ErrNegativeIndex
 
 	actualElementAt, actualErr := ElementAt(list, index)
 
@@ -206,7 +207,7 @@ func TestMyReverse_EmptyList(t *testing.T) {
 	list := []int{}
 
 	expectedMyReverse := []int{}
-	expectedErr := ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualMyReverse, actualErr := MyReverse(list)
 
@@ -257,7 +258,7 @@ func TestIsPalindrome_EmptyList(t *testing.T) {
 	list := []int{}
 
 	expectedIsPalindrome := false
-	expectedErr := ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualIsPalindrome, actualErr := IsPalindrome(list)
 
@@ -327,7 +328,7 @@ func TestCompress_EmptyList(t *testing.T) {
 	list := []string{}
 
 	expectedCompress := []string{}
-	expectedErr := ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualCompress, actualErr := Compress(list)
 
@@ -361,7 +362,7 @@ func TestPack_EmptyList(t *testing.T) {
 	list := []string{}
 
 	expectedPack := []string{}
-	expectedErr := ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualPack, actualErr := Pack(list)
 
@@ -377,7 +378,7 @@ func TestPack_EmptyList(t *testing.T) {
 func TestEncode(t *testing.T) {
 	list := []string{"a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"}
 
-	expectedEncode := []RLE{{4, "a"}, {1, "b"}, {2, "c"}, {2, "a"}, {1, "d"}, {4, "e"}}
+	expectedEncode := []definitions.RLE{{4, "a"}, {1, "b"}, {2, "c"}, {2, "a"}, {1, "d"}, {4, "e"}}
 	var expectedErr error
 
 	actualEncode, actualErr := Encode(list)
@@ -394,8 +395,8 @@ func TestEncode(t *testing.T) {
 func TestEncode_EmptyList(t *testing.T) {
 	list := []string{}
 
-	expectedEncode := []RLE{}
-	expectedErr := ErrEmptyList
+	expectedEncode := []definitions.RLE{}
+	expectedErr := definitions.ErrEmptyList
 
 	actualEncode, actualErr := Encode(list)
 

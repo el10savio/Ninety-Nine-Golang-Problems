@@ -1,9 +1,10 @@
 package lists
 
 import (
-	"errors"
 	"fmt"
 	"reflect"
+
+	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
 // MyLast Problem 1
@@ -12,7 +13,7 @@ func MyLast(list []int) (int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return 0, ErrEmptyList
+		return 0, definitions.ErrEmptyList
 	}
 
 	return list[length-1], nil
@@ -24,7 +25,7 @@ func MyButLast(list []int) (int, error) {
 	length := len(list)
 
 	if length < 2 {
-		return 0, ErrAtLeastTwo
+		return 0, definitions.ErrAtLeastTwo
 	}
 
 	return list[length-2], nil
@@ -35,11 +36,11 @@ func MyButLast(list []int) (int, error) {
 // The first element in the list is index 1.
 func ElementAt(list []int, index int) (int, error) {
 	if len(list) < 1 {
-		return 0, ErrEmptyList
+		return 0, definitions.ErrEmptyList
 	}
 
 	if index < 0 {
-		return 0, ErrNegativeIndex
+		return 0, definitions.ErrNegativeIndex
 	}
 
 	index--
@@ -58,7 +59,7 @@ func MyReverse(list []int) ([]int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return []int{}, ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	reversedList := make([]int, length)
@@ -104,7 +105,7 @@ func Flatten(compositeList []interface{}) []int {
 // Eliminate consecutive duplicates of list elements.
 func Compress(list []string) ([]string, error) {
 	if len(list) < 1 {
-		return []string{}, ErrEmptyList
+		return []string{}, definitions.ErrEmptyList
 	}
 
 	present := make(map[string]bool)
@@ -128,7 +129,7 @@ func Pack(list []string) ([]string, error) {
 	length := len(list)
 
 	if length < 1 {
-		return []string{}, ErrEmptyList
+		return []string{}, definitions.ErrEmptyList
 	}
 
 	present := make(map[string]bool)
@@ -157,16 +158,16 @@ func Pack(list []string) ([]string, error) {
 
 // Encode Problem 10
 // Run-length encoding of a list.
-func Encode(list []string) ([]RLE, error) {
+func Encode(list []string) ([]definitions.RLE, error) {
 	packed, err := Pack(list)
 	if err != nil {
-		return []RLE{}, ErrEmptyList
+		return []definitions.RLE{}, definitions.ErrEmptyList
 	}
 
-	encoded := make([]RLE, 0)
+	encoded := make([]definitions.RLE, 0)
 
 	for _, element := range packed {
-		encoded = append(encoded, RLE{Count: len(element), Value: string(element[0])})
+		encoded = append(encoded, definitions.RLE{Count: len(element), Value: string(element[0])})
 	}
 
 	return encoded, nil
