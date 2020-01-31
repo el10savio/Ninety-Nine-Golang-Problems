@@ -4,13 +4,13 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/el10savio/Ninety-Nine-Golang-Problems/lists"
+	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
 func TestEncodeModified(t *testing.T) {
 	list := []string{"a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"}
 
-	expectedEncodeModified := []lists.RLE{{4, "a"}, {0, "b"}, {2, "c"}, {2, "a"}, {0, "d"}, {4, "e"}}
+	expectedEncodeModified := []definitions.RLE{{4, "a"}, {0, "b"}, {2, "c"}, {2, "a"}, {0, "d"}, {4, "e"}}
 	var expectedErr error
 
 	actualEncodeModified, actualErr := EncodeModified(list)
@@ -27,8 +27,8 @@ func TestEncodeModified(t *testing.T) {
 func TestEncodeModified_EmptyList(t *testing.T) {
 	list := []string{}
 
-	expectedEncodeModified := []lists.RLE{}
-	expectedErr := lists.ErrEmptyList
+	expectedEncodeModified := []definitions.RLE{}
+	expectedErr := definitions.ErrEmptyList
 
 	actualEncodeModified, actualErr := EncodeModified(list)
 
@@ -42,7 +42,7 @@ func TestEncodeModified_EmptyList(t *testing.T) {
 }
 
 func TestDecodeModified(t *testing.T) {
-	list := []lists.RLE{{4, "a"}, {0, "b"}, {2, "c"}, {2, "a"}, {0, "d"}, {4, "e"}}
+	list := []definitions.RLE{{4, "a"}, {0, "b"}, {2, "c"}, {2, "a"}, {0, "d"}, {4, "e"}}
 
 	expectedDecodeModified := []string{"a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"}
 	var expectedErr error
@@ -59,10 +59,10 @@ func TestDecodeModified(t *testing.T) {
 }
 
 func TestDecodeModified_EmptyList(t *testing.T) {
-	list := []lists.RLE{}
+	list := []definitions.RLE{}
 
 	expectedDecodeModified := []string{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualDecodeModified, actualErr := DecodeModified(list)
 
@@ -96,7 +96,7 @@ func TestDupli_EmptyList(t *testing.T) {
 	list := []int{}
 
 	expectedDupli := []int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualDupli, actualErr := Dupli(list)
 
@@ -132,7 +132,7 @@ func TestRepli_EmptyList(t *testing.T) {
 	factor := 3
 
 	expectedRepli := []int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualRepli, actualErr := Repli(list, factor)
 
@@ -150,7 +150,7 @@ func TestRepli_ZeroFactor(t *testing.T) {
 	factor := 0
 
 	expectedRepli := []int{}
-	expectedErr := ErrNotPositiveNumber
+	expectedErr := definitions.ErrNotPositiveNumber
 
 	actualRepli, actualErr := Repli(list, factor)
 
@@ -168,7 +168,7 @@ func TestRepli_NegativeFactor(t *testing.T) {
 	factor := -3
 
 	expectedRepli := []int{}
-	expectedErr := ErrNotPositiveNumber
+	expectedErr := definitions.ErrNotPositiveNumber
 
 	actualRepli, actualErr := Repli(list, factor)
 
@@ -204,7 +204,7 @@ func TestDropEvery_EmptyList(t *testing.T) {
 	factor := 3
 
 	expectedDropEvery := []int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualDropEvery, actualErr := DropEvery(list, factor)
 
@@ -222,7 +222,7 @@ func TestDropEvery_ZeroFactor(t *testing.T) {
 	factor := 0
 
 	expectedDropEvery := []int{}
-	expectedErr := ErrNotPositiveNumber
+	expectedErr := definitions.ErrNotPositiveNumber
 
 	actualDropEvery, actualErr := DropEvery(list, factor)
 
@@ -240,7 +240,7 @@ func TestDropEvery_NegativeFactor(t *testing.T) {
 	factor := -3
 
 	expectedDropEvery := []int{}
-	expectedErr := ErrNotPositiveNumber
+	expectedErr := definitions.ErrNotPositiveNumber
 
 	actualDropEvery, actualErr := DropEvery(list, factor)
 
@@ -276,7 +276,7 @@ func TestSplit_EmptyList(t *testing.T) {
 	splitPoint := 3
 
 	expectedSplit := [][]int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualSplit, actualErr := Split(list, splitPoint)
 
@@ -294,7 +294,7 @@ func TestSplit_NegativeSplitPoint(t *testing.T) {
 	splitPoint := -3
 
 	expectedSplit := [][]int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualSplit, actualErr := Split(list, splitPoint)
 
@@ -312,7 +312,7 @@ func TestSplit_OutOfRangeSplitPoint(t *testing.T) {
 	splitPoint := 25
 
 	expectedSplit := [][]int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualSplit, actualErr := Split(list, splitPoint)
 
@@ -330,7 +330,7 @@ func TestSplit_ZeroSplitPoint(t *testing.T) {
 	splitPoint := 0
 
 	expectedSplit := [][]int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualSplit, actualErr := Split(list, splitPoint)
 
@@ -366,7 +366,7 @@ func TestSlice_EmptyList(t *testing.T) {
 	startIndex, endIndex := 3, 7
 
 	expectedSlice := []int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualSlice, actualErr := Slice(list, startIndex, endIndex)
 
@@ -384,7 +384,7 @@ func TestSlice_OutOfBoundsStartIndex(t *testing.T) {
 	startIndex, endIndex := -3, 7
 
 	expectedSlice := []int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualSlice, actualErr := Slice(list, startIndex, endIndex)
 
@@ -402,7 +402,7 @@ func TestSlice_OutOfBoundsEndIndex(t *testing.T) {
 	startIndex, endIndex := 3, 17
 
 	expectedSlice := []int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualSlice, actualErr := Slice(list, startIndex, endIndex)
 
@@ -456,7 +456,7 @@ func TestRotate_EmptyList(t *testing.T) {
 	rotationIndex := 3
 
 	expectedRotate := []int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualRotate, actualErr := Rotate(list, rotationIndex)
 
@@ -531,7 +531,7 @@ func TestRemoveAt_EmptyList(t *testing.T) {
 	removalPoint := 2
 
 	expectedRemoveAt := []int{}
-	expectedErr := lists.ErrEmptyList
+	expectedErr := definitions.ErrEmptyList
 
 	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
 
@@ -549,7 +549,7 @@ func TestRemoveAt_NegativeSplitPoint(t *testing.T) {
 	removalPoint := -2
 
 	expectedRemoveAt := []int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
 
@@ -567,7 +567,7 @@ func TestRemoveAt_OutOfRangeSplitPoint(t *testing.T) {
 	removalPoint := 20
 
 	expectedRemoveAt := []int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
 
@@ -585,7 +585,7 @@ func TestRemoveAt_ZeroSplitPoint(t *testing.T) {
 	removalPoint := 0
 
 	expectedRemoveAt := []int{}
-	expectedErr := ErrIndexOutOfRange
+	expectedErr := definitions.ErrIndexOutOfRange
 
 	actualRemoveAt, actualErr := RemoveAt(list, removalPoint)
 

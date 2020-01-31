@@ -3,25 +3,26 @@ package listscontinued
 import (
 	"math"
 
+	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/lists"
 )
 
 // EncodeModified Problem 11
 // Modified run-length encoding.
 // Can't get it to omit struct value if not present
-func EncodeModified(list []string) ([]lists.RLE, error) {
+func EncodeModified(list []string) ([]definitions.RLE, error) {
 	packed, err := lists.Pack(list)
 	if err != nil {
-		return []lists.RLE{}, lists.ErrEmptyList
+		return []definitions.RLE{}, definitions.ErrEmptyList
 	}
 
-	encoded := make([]lists.RLE, 0)
+	encoded := make([]definitions.RLE, 0)
 
 	for _, element := range packed {
 		if len(element) > 1 {
-			encoded = append(encoded, lists.RLE{Count: len(element), Value: string(element[0])})
+			encoded = append(encoded, definitions.RLE{Count: len(element), Value: string(element[0])})
 		} else {
-			encoded = append(encoded, lists.RLE{Value: string(element[0])})
+			encoded = append(encoded, definitions.RLE{Value: string(element[0])})
 		}
 	}
 
@@ -30,9 +31,9 @@ func EncodeModified(list []string) ([]lists.RLE, error) {
 
 // DecodeModified Problem 12
 // Decode a run-length encoded list.
-func DecodeModified(rleList []lists.RLE) ([]string, error) {
+func DecodeModified(rleList []definitions.RLE) ([]string, error) {
 	if len(rleList) < 1 {
-		return []string{}, lists.ErrEmptyList
+		return []string{}, definitions.ErrEmptyList
 	}
 
 	decoded := make([]string, 0)
@@ -54,7 +55,7 @@ func DecodeModified(rleList []lists.RLE) ([]string, error) {
 // Duplicate the elements of a list.
 func Dupli(list []int) ([]int, error) {
 	if len(list) < 1 {
-		return []int{}, lists.ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	duplicated := make([]int, 0)
@@ -70,11 +71,11 @@ func Dupli(list []int) ([]int, error) {
 // Replicate the elements of a list a given number of times.
 func Repli(list []int, factor int) ([]int, error) {
 	if len(list) < 1 {
-		return []int{}, lists.ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	if factor < 1 {
-		return []int{}, ErrNotPositiveNumber
+		return []int{}, definitions.ErrNotPositiveNumber
 	}
 
 	duplicated := make([]int, 0)
@@ -94,11 +95,11 @@ func DropEvery(list []int, factor int) ([]int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return []int{}, lists.ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	if factor < 1 {
-		return []int{}, ErrNotPositiveNumber
+		return []int{}, definitions.ErrNotPositiveNumber
 	}
 
 	dropped := make([]int, 0)
@@ -119,11 +120,11 @@ func Split(list []int, splitPoint int) ([][]int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return [][]int{}, lists.ErrEmptyList
+		return [][]int{}, definitions.ErrEmptyList
 	}
 
 	if splitPoint <= 0 || splitPoint > length {
-		return [][]int{}, ErrIndexOutOfRange
+		return [][]int{}, definitions.ErrIndexOutOfRange
 	}
 
 	divided := make([][]int, 0)
@@ -140,15 +141,15 @@ func Slice(list []int, startIndex int, endIndex int) ([]int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return []int{}, lists.ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	if startIndex <= 0 || startIndex > length {
-		return []int{}, ErrIndexOutOfRange
+		return []int{}, definitions.ErrIndexOutOfRange
 	}
 
 	if endIndex <= 0 || endIndex > length {
-		return []int{}, ErrIndexOutOfRange
+		return []int{}, definitions.ErrIndexOutOfRange
 	}
 
 	extract := list[startIndex-1 : endIndex]
@@ -162,7 +163,7 @@ func Rotate(list []int, rotationIndex int) ([]int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return []int{}, lists.ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	if rotationIndex == 0 {
@@ -195,13 +196,13 @@ func RemoveAt(list []int, removalPoint int) ([]int, error) {
 	length := len(list)
 
 	if length < 1 {
-		return []int{}, lists.ErrEmptyList
+		return []int{}, definitions.ErrEmptyList
 	}
 
 	removalPoint--
 
 	if removalPoint < 0 || removalPoint > length {
-		return []int{}, ErrIndexOutOfRange
+		return []int{}, definitions.ErrIndexOutOfRange
 	}
 
 	list = append(list[:removalPoint], list[removalPoint+1:]...)
