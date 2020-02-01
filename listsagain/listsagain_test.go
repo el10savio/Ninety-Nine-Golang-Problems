@@ -101,3 +101,75 @@ func TestInsertAt_ZeroInsertPoint(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedInsertAt, actualInsertAt)
 	}
 }
+
+func TestRange(t *testing.T) {
+	startValue, endValue := 4, 9
+
+	expectedRange := []int{4, 5, 6, 7, 8, 9}
+
+	actualRange := Range(startValue, endValue)
+
+	if !reflect.DeepEqual(expectedRange, actualRange) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
+	}
+}
+
+func TestRange_SameStartValueAndEndValue(t *testing.T) {
+	startValue, endValue := 4, 4
+
+	expectedRange := []int{}
+
+	actualRange := Range(startValue, endValue)
+
+	if !reflect.DeepEqual(expectedRange, actualRange) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
+	}
+}
+
+func TestRange_NegativeStartValuePositiveEndValue(t *testing.T) {
+	startValue, endValue := -4, 4
+
+	expectedRange := []int{-4, -3, -2, -1, 0, 1, 2, 3, 4}
+
+	actualRange := Range(startValue, endValue)
+
+	if !reflect.DeepEqual(expectedRange, actualRange) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
+	}
+}
+
+func TestRange_NegativeStartValueNegativeEndValue(t *testing.T) {
+	startValue, endValue := -7, -4
+
+	expectedRange := []int{-7, -6, -5, -4}
+
+	actualRange := Range(startValue, endValue)
+
+	if !reflect.DeepEqual(expectedRange, actualRange) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
+	}
+}
+
+func TestRange_PositiveStartValueNegativeEndValue(t *testing.T) {
+	startValue, endValue := 7, -4
+
+	expectedRange := []int{7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4}
+
+	actualRange := Range(startValue, endValue)
+
+	if !reflect.DeepEqual(expectedRange, actualRange) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
+	}
+}
+
+func TestRange_PositiveStartValueGreaterThanPositiveEndValue(t *testing.T) {
+	startValue, endValue := 7, 4
+
+	expectedRange := []int{7, 6, 5, 4}
+
+	actualRange := Range(startValue, endValue)
+
+	if !reflect.DeepEqual(expectedRange, actualRange) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
+	}
+}

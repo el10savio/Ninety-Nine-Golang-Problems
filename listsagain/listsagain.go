@@ -1,6 +1,8 @@
 package listsagain
 
-import "github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
+import (
+	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
+)
 
 func InsertAt(value int, list []int, insertPoint int) ([]int, error) {
 	length := len(list)
@@ -20,4 +22,25 @@ func InsertAt(value int, list []int, insertPoint int) ([]int, error) {
 	newList[insertPoint] = value
 
 	return newList, nil
+}
+
+func Range(startValue int, endValue int) []int {
+	if startValue == endValue {
+		return []int{}
+	}
+
+	list := make([]int, 0)
+
+	if startValue < endValue {
+		for value := startValue; value <= endValue; value++ {
+			list = append(list, value)
+		}
+	} else {
+		for value := startValue; value >= endValue; value-- {
+			list = append(list, value)
+		}
+
+	}
+
+	return list
 }
