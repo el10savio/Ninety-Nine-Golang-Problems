@@ -44,3 +44,20 @@ func Range(startValue int, endValue int) []int {
 
 	return list
 }
+
+func RndSelect(list []int, count int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, definitions.ErrEmptyList
+	}
+
+	if count < 0 {
+		return []int{}, definitions.ErrNegativeNumber
+	}
+
+	if count == 0 {
+		return []int{}, nil
+	}
+
+}
