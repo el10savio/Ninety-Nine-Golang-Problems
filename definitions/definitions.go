@@ -19,8 +19,8 @@ var (
 	ErrIndexOutOfRange = errors.New("index out of range")
 )
 
-// RLE is the type used in
-// Encode(list []string) ([]RLE, error)
+// RLE is the type in
+// Run Length Encoding
 type RLE struct {
 	Count int
 	Value string
