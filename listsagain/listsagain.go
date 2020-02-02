@@ -101,5 +101,6 @@ func DiffSelect(count int, max int) ([]int, error) {
 			items[index] = element
 		}
 	}
+	
 	return items, nil
 }

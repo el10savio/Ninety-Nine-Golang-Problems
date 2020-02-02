@@ -339,4 +339,5 @@ func TestDiffSelect_ZeroMax(t *testing.T) {
 	if !reflect.DeepEqual(expectedDiffSelect, actualDiffSelect) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelect, actualDiffSelect)
 	}
+	
 }
