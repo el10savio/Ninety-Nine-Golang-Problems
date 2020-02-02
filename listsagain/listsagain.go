@@ -1,6 +1,9 @@
 package listsagain
 
 import (
+	"math/rand"
+	"time"
+
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
@@ -60,4 +63,13 @@ func RndSelect(list []int, count int) ([]int, error) {
 		return []int{}, nil
 	}
 
+	items := make([]int, count)
+	rand.Seed(time.Now().UnixNano())
+
+	for index := 0; index < count; index++ {
+		element := list[rand.Intn(length)]
+		items[index] = element
+	}
+
+	return items, nil
 }

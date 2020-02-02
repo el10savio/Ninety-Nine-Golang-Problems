@@ -173,3 +173,76 @@ func TestRange_PositiveStartValueGreaterThanPositiveEndValue(t *testing.T) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedRange, actualRange)
 	}
 }
+
+func TestRndSelect(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	count := 3
+
+	expectedRndSelectCount := 3
+	var expectedErr error
+
+	actualRndSelect, actualErr := RndSelect(list, count)
+	actualRndSelectCount := len(actualRndSelect)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRndSelectCount, actualRndSelectCount) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndSelectCount, actualRndSelectCount)
+	}
+}
+
+func TestRndSelect_EmptyList(t *testing.T) {
+	list := []int{}
+	count := 3
+
+	expectedRndSelect := []int{}
+	expectedErr := definitions.ErrEmptyList
+
+	actualRndSelect, actualErr := RndSelect(list, count)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRndSelect, actualRndSelect) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndSelect, actualRndSelect)
+	}
+}
+
+func TestRndSelect_NegativeCount(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	count := -3
+
+	expectedRndSelect := []int{}
+	expectedErr := definitions.ErrNegativeNumber
+
+	actualRndSelect, actualErr := RndSelect(list, count)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRndSelect, actualRndSelect) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndSelect, actualRndSelect)
+	}
+}
+
+func TestRndSelect_ZeroCount(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	count := 0
+
+	expectedRndSelect := []int{}
+	var expectedErr error
+
+	actualRndSelect, actualErr := RndSelect(list, count)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRndSelect, actualRndSelect) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndSelect, actualRndSelect)
+	}
+}
