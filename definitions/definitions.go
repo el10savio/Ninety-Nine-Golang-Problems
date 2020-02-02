@@ -18,6 +18,9 @@ var (
 	// ErrNegativeNumber - Error for factor cannot be negative
 	ErrNegativeNumber = errors.New("factor cannot be negative")
 
+	// ErrZero - Error for factor cannot be 0
+	ErrZero = errors.New("factor cannot be 0")
+
 	// ErrIndexOutOfRange - Error for index out of range
 	ErrIndexOutOfRange = errors.New("index out of range")
 )

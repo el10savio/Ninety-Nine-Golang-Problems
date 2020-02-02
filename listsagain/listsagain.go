@@ -73,3 +73,33 @@ func RndSelect(list []int, count int) ([]int, error) {
 
 	return items, nil
 }
+
+func DiffSelect(count int, max int) ([]int, error) {
+	if count < 0 {
+		return []int{}, definitions.ErrNegativeNumber
+	}
+
+	if count == 0 {
+		return []int{}, nil
+	}
+
+	if max == 0 {
+		return []int{}, definitions.ErrZero
+	}
+
+	items := make([]int, count)
+	rand.Seed(time.Now().UnixNano())
+
+	if max > 0 {
+		for index := 0; index < count; index++ {
+			element := rand.Intn(max) + 1
+			items[index] = element
+		}
+	} else {
+		for index := 0; index < count; index++ {
+			element := -1 * (rand.Intn(-1*max) + 1)
+			items[index] = element
+		}
+	}
+	return items, nil
+}

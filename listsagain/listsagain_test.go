@@ -1,6 +1,7 @@
 package listsagain
 
 import (
+	"log"
 	"reflect"
 	"testing"
 
@@ -244,5 +245,98 @@ func TestRndSelect_ZeroCount(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedRndSelect, actualRndSelect) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndSelect, actualRndSelect)
+	}
+}
+
+func TestDiffSelect(t *testing.T) {
+	count := 6
+	max := 49
+
+	expectedDiffSelectCount := 6
+	var expectedErr error
+
+	actualDiffSelect, actualErr := DiffSelect(count, max)
+	actualDiffSelectCount := len(actualDiffSelect)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDiffSelectCount, actualDiffSelectCount) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelectCount, actualDiffSelectCount)
+	}
+}
+
+func TestDiffSelect_NegativeCount(t *testing.T) {
+	count := -6
+	max := 49
+
+	expectedDiffSelect := []int{}
+	expectedErr := definitions.ErrNegativeNumber
+
+	actualDiffSelect, actualErr := DiffSelect(count, max)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDiffSelect, actualDiffSelect) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelect, actualDiffSelect)
+	}
+}
+
+func TestDiffSelect_ZeroCount(t *testing.T) {
+	count := 0
+	max := 49
+
+	expectedDiffSelect := []int{}
+	var expectedErr error
+
+	actualDiffSelect, actualErr := DiffSelect(count, max)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDiffSelect, actualDiffSelect) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelect, actualDiffSelect)
+	}
+}
+
+func TestDiffSelect_NegativeMax(t *testing.T) {
+	count := 6
+	max := -49
+
+	expectedDiffSelectCount := 6
+	var expectedErr error
+
+	actualDiffSelect, actualErr := DiffSelect(count, max)
+	log.Println(actualDiffSelect)
+	actualDiffSelectCount := len(actualDiffSelect)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDiffSelectCount, actualDiffSelectCount) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelectCount, actualDiffSelectCount)
+	}
+}
+
+func TestDiffSelect_ZeroMax(t *testing.T) {
+	count := 6
+	max := 0
+
+	expectedDiffSelect := []int{}
+	expectedErr := definitions.ErrZero
+
+	actualDiffSelect, actualErr := DiffSelect(count, max)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedDiffSelect, actualDiffSelect) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelect, actualDiffSelect)
 	}
 }
