@@ -101,6 +101,19 @@ func DiffSelect(count int, max int) ([]int, error) {
 			items[index] = element
 		}
 	}
-	
+
 	return items, nil
+}
+
+func RndPermu(list []int) ([]int, error) {
+	length := len(list)
+
+	if length < 1 {
+		return []int{}, definitions.ErrEmptyList
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(length, func(i, j int) { list[i], list[j] = list[j], list[i] })
+
+	return list, nil
 }

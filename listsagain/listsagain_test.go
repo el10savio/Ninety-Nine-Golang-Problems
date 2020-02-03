@@ -339,5 +339,39 @@ func TestDiffSelect_ZeroMax(t *testing.T) {
 	if !reflect.DeepEqual(expectedDiffSelect, actualDiffSelect) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedDiffSelect, actualDiffSelect)
 	}
-	
+}
+
+func TestRndPermu(t *testing.T) {
+	list := []int{1, 2, 3, 4, 5, 6}
+
+	expectedRndPermuCount := 6
+	var expectedErr error
+
+	actualRndPermu, actualErr := RndPermu(list)
+	actualRndPermuCount := len(actualRndPermu)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRndPermuCount, actualRndPermuCount) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndPermuCount, actualRndPermuCount)
+	}
+}
+
+func TestRndPermu_EmptyList(t *testing.T) {
+	list := []int{}
+
+	expectedRndPermu := []int{}
+	expectedErr := definitions.ErrEmptyList
+
+	actualRndPermu, actualErr := RndPermu(list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedRndPermu, actualRndPermu) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndPermu, actualRndPermu)
+	}
 }
