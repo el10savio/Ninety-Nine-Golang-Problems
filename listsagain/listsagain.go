@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
+	combinations "github.com/mxschmitt/golang-combinations"
 )
 
 func InsertAt(value int, list []int, insertPoint int) ([]int, error) {
@@ -116,4 +117,31 @@ func RndPermu(list []int) ([]int, error) {
 	rand.Shuffle(length, func(i, j int) { list[i], list[j] = list[j], list[i] })
 
 	return list, nil
+}
+
+func Combinations(count int, list []string) ([][]string, error) {
+	length := len(list)
+
+	if length < 1 {
+		return [][]string{}, definitions.ErrEmptyList
+	}
+
+	if count <= 0 {
+		return [][]string{}, definitions.ErrNotPositiveNumber
+	}
+
+	if count > length {
+		return [][]string{}, nil
+	}
+
+	allCombinations := combinations.All(list)
+	countCombinations := make([][]string, 0)
+
+	for _, combination := range allCombinations {
+		if len(combination) == count {
+			countCombinations = append(countCombinations, combination)
+		}
+	}
+
+	return countCombinations, nil
 }

@@ -1,7 +1,6 @@
 package listsagain
 
 import (
-	"log"
 	"reflect"
 	"testing"
 
@@ -311,7 +310,6 @@ func TestDiffSelect_NegativeMax(t *testing.T) {
 	var expectedErr error
 
 	actualDiffSelect, actualErr := DiffSelect(count, max)
-	log.Println(actualDiffSelect)
 	actualDiffSelectCount := len(actualDiffSelect)
 
 	if !reflect.DeepEqual(expectedErr, actualErr) {
@@ -373,5 +371,115 @@ func TestRndPermu_EmptyList(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedRndPermu, actualRndPermu) {
 		t.Fatalf("Expected: %v\n Got: %v\n", expectedRndPermu, actualRndPermu)
+	}
+}
+
+func TestCombinations(t *testing.T) {
+	list := []string{"a", "b", "c", "d", "e", "f"}
+	count := 3
+
+	expectedCombinationsCount := 20
+	var expectedErr error
+
+	actualCombinations, actualErr := Combinations(count, list)
+	actualCombinationsCount := len(actualCombinations)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCombinationsCount, actualCombinationsCount) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCombinationsCount, actualCombinationsCount)
+	}
+}
+
+func TestCombinations_EmptyList(t *testing.T) {
+	list := []string{}
+	count := 3
+
+	expectedCombinations := [][]string{}
+	expectedErr := definitions.ErrEmptyList
+
+	actualCombinations, actualErr := Combinations(count, list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCombinations, actualCombinations) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCombinations, actualCombinations)
+	}
+}
+
+func TestCombinations_NegativeCount(t *testing.T) {
+	list := []string{"a", "b", "c", "d"}
+	count := -3
+
+	expectedCombinations := [][]string{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualCombinations, actualErr := Combinations(count, list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCombinations, actualCombinations) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCombinations, actualCombinations)
+	}
+}
+
+func TestCombinations_ZeroCount(t *testing.T) {
+	list := []string{"a", "b", "c", "d"}
+	count := 0
+
+	expectedCombinations := [][]string{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualCombinations, actualErr := Combinations(count, list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCombinations, actualCombinations) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCombinations, actualCombinations)
+	}
+}
+
+func TestCombinations_CountGreaterThanLength(t *testing.T) {
+	list := []string{"a", "b", "c", "d"}
+	count := 10
+
+	expectedCombinationsCount := 0
+	var expectedErr error
+
+	actualCombinations, actualErr := Combinations(count, list)
+	actualCombinationsCount := len(actualCombinations)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCombinationsCount, actualCombinationsCount) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCombinationsCount, actualCombinationsCount)
+	}
+}
+
+func TestCombinations_CountEqualToLength(t *testing.T) {
+	list := []string{"a", "b", "c", "d"}
+	count := 4
+
+	expectedCombinations := [][]string{{"a", "b", "c", "d"}}
+	var expectedErr error
+
+	actualCombinations, actualErr := Combinations(count, list)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCombinations, actualCombinations) {
+		t.Fatalf("Expected: %v\n Got: %v\n", expectedCombinations, actualCombinations)
 	}
 }
