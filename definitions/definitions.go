@@ -1,6 +1,10 @@
 package definitions
 
-import "errors"
+import (
+	"errors"
+	"math"
+	"math/rand"
+)
 
 var (
 	// ErrEmptyList - Error for empty list
@@ -30,4 +34,31 @@ var (
 type RLE struct {
 	Count int
 	Value string
+}
+
+func MillerTest(d int, value int) bool {
+	// Random number between [2, n-2]
+	a := 2 + rand.Intn(value-4) + 1
+
+	// a^d % n
+	x := int(math.Pow(float64(a), float64(d))) % value
+
+	if x == 1 || x == value-1 {
+		return true
+	}
+
+	for d != value-1 {
+		x := (x * x) % value
+		d *= 2
+
+		if x == 1 {
+			return false
+		}
+
+		if x == value-1 {
+			return true
+		}
+	}
+
+	return false
 }
