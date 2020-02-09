@@ -180,3 +180,59 @@ func TestCoprime_NegativeValue(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedCoprime, actualCoprime)
 	}
 }
+
+func TestTotient(t *testing.T) {
+	Ms := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	expectedTotients := []int{1, 1, 2, 2, 4, 2, 6, 4, 6, 4}
+
+	var expectedErr error
+
+	for i := 0; i < len(Ms); i++ {
+		m := Ms[i]
+		expectedTotient := expectedTotients[i]
+
+		actualTotient, actualErr := Totient(m)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedTotient, actualTotient) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotient, actualTotient)
+		}
+	}
+}
+
+func TestTotient_NegativeM(t *testing.T) {
+	m := -10
+
+	expectedTotient := 0
+	expectedErr := definitions.ErrNegativeNumber
+
+	actualTotient, actualErr := Totient(m)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedTotient, actualTotient) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotient, actualTotient)
+	}
+}
+
+func TestTotient_ZeroM(t *testing.T) {
+	m := 0
+
+	expectedTotient := 0
+	expectedErr := definitions.ErrNegativeNumber
+
+	actualTotient, actualErr := Totient(m)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedTotient, actualTotient) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotient, actualTotient)
+	}
+}

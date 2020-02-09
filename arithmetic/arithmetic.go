@@ -62,3 +62,24 @@ func Coprime(a int, b int) (bool, error) {
 
 	return gcd == 1, nil
 }
+
+func Totient(m int) (int, error) {
+	if m <= 0 {
+		return 0, definitions.ErrNegativeNumber
+	}
+
+	count := 1
+
+	for i := 2; i < m; i++ {
+		comprime, err := Coprime(m, i)
+		if err != nil {
+			return 0, err
+		}
+
+		if comprime {
+			count++
+		}
+	}
+
+	return count, nil
+}
