@@ -8,6 +8,8 @@ import (
 	combinations "github.com/mxschmitt/golang-combinations"
 )
 
+// InsertAt Problem 21
+// Insert an element at a given position into a list.
 func InsertAt(value int, list []int, insertPoint int) ([]int, error) {
 	length := len(list)
 
@@ -28,6 +30,8 @@ func InsertAt(value int, list []int, insertPoint int) ([]int, error) {
 	return newList, nil
 }
 
+// Range Problem 22
+// Create a list containing all integers within a given range.
 func Range(startValue int, endValue int) []int {
 	if startValue == endValue {
 		return []int{}
@@ -49,6 +53,8 @@ func Range(startValue int, endValue int) []int {
 	return list
 }
 
+// RndSelect Problem 23
+// Extract a given number of randomly selected elements from a list.
 func RndSelect(list []int, count int) ([]int, error) {
 	length := len(list)
 
@@ -75,6 +81,8 @@ func RndSelect(list []int, count int) ([]int, error) {
 	return items, nil
 }
 
+// DiffSelect Problem 24
+// Lotto: Draw N different random numbers from the set 1..M.
 func DiffSelect(count int, max int) ([]int, error) {
 	if count < 0 {
 		return []int{}, definitions.ErrNegativeNumber
@@ -106,6 +114,8 @@ func DiffSelect(count int, max int) ([]int, error) {
 	return items, nil
 }
 
+// RndPermu Problem 25
+// Generate a random permutation of the elements of a list.
 func RndPermu(list []int) ([]int, error) {
 	length := len(list)
 
@@ -119,6 +129,8 @@ func RndPermu(list []int) ([]int, error) {
 	return list, nil
 }
 
+// Combinations Problem 26
+// Generate the combinations of K distinct objects chosen from the N elements of a list
 func Combinations(count int, list []string) ([][]string, error) {
 	length := len(list)
 
@@ -147,5 +159,7 @@ func Combinations(count int, list []string) ([][]string, error) {
 }
 
 // Problem 27 Not Solved
+// Group the elements of a set into disjoint subsets.
 
 // Problem 28 Not Solved
+// Sorting a list of lists according to length of sublists
