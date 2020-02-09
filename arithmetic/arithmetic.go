@@ -53,3 +53,12 @@ func GCD(a int, b int) (int, error) {
 
 	return gcd, nil
 }
+
+func Coprime(a int, b int) (bool, error) {
+	gcd, err := GCD(b%a, a)
+	if err != nil {
+		return false, err
+	}
+
+	return gcd == 1, nil
+}

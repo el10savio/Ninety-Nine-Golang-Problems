@@ -146,3 +146,37 @@ func TestGCD_ZeroValue(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGCD, actualGCD)
 	}
 }
+
+func TestCoprime(t *testing.T) {
+	a, b := 35, 64
+
+	expectedCoprime := true
+	var expectedErr error
+
+	actualCoprime, actualErr := Coprime(a, b)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCoprime, actualCoprime) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedCoprime, actualCoprime)
+	}
+}
+
+func TestCoprime_NegativeValue(t *testing.T) {
+	a, b := -35, 64
+
+	expectedCoprime := false
+	expectedErr := definitions.ErrNegativeNumber
+
+	actualCoprime, actualErr := Coprime(a, b)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedCoprime, actualCoprime) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedCoprime, actualCoprime)
+	}
+}
