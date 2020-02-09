@@ -145,3 +145,7 @@ func Combinations(count int, list []string) ([][]string, error) {
 
 	return countCombinations, nil
 }
+
+// Problem 27 Not Solved
+
+// Problem 28 Not Solved
