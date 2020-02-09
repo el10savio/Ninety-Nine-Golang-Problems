@@ -58,54 +58,22 @@ func TestIsPrime_Zero(t *testing.T) {
 	}
 }
 
-func TestIsPrime_One(t *testing.T) {
-	number := 1
+func TestIsPrime_OneTwoThree(t *testing.T) {
+	numbers := []int{1, 2, 3}
 
 	expectedIsPrime := true
 	var expectedErr error
 
-	actualIsPrime, actualErr := IsPrime(number)
+	for _, number := range numbers {
+		actualIsPrime, actualErr := IsPrime(number)
 
-	if !reflect.DeepEqual(expectedErr, actualErr) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
-	}
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
 
-	if !reflect.DeepEqual(expectedIsPrime, actualIsPrime) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedIsPrime, actualIsPrime)
-	}
-}
-
-func TestIsPrime_Two(t *testing.T) {
-	number := 2
-
-	expectedIsPrime := true
-	var expectedErr error
-
-	actualIsPrime, actualErr := IsPrime(number)
-
-	if !reflect.DeepEqual(expectedErr, actualErr) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
-	}
-
-	if !reflect.DeepEqual(expectedIsPrime, actualIsPrime) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedIsPrime, actualIsPrime)
-	}
-}
-
-func TestIsPrime_Three(t *testing.T) {
-	number := 3
-
-	expectedIsPrime := true
-	var expectedErr error
-
-	actualIsPrime, actualErr := IsPrime(number)
-
-	if !reflect.DeepEqual(expectedErr, actualErr) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
-	}
-
-	if !reflect.DeepEqual(expectedIsPrime, actualIsPrime) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedIsPrime, actualIsPrime)
+		if !reflect.DeepEqual(expectedIsPrime, actualIsPrime) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedIsPrime, actualIsPrime)
+		}
 	}
 }
 
