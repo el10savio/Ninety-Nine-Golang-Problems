@@ -93,3 +93,56 @@ func TestIsPrime_Four(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedIsPrime, actualIsPrime)
 	}
 }
+
+func TestGCD(t *testing.T) {
+	a, b := 36, 63
+	// 98, 56 => 14
+	// 48, 18 => 6
+
+	expectedGCD := 9
+	var expectedErr error
+
+	actualGCD, actualErr := GCD(a, b)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGCD, actualGCD) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGCD, actualGCD)
+	}
+}
+
+func TestGCD_NegativeValue(t *testing.T) {
+	a, b := -36, 63
+
+	expectedGCD := 0
+	expectedErr := definitions.ErrNegativeNumber
+
+	actualGCD, actualErr := GCD(a, b)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGCD, actualGCD) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGCD, actualGCD)
+	}
+}
+
+func TestGCD_ZeroValue(t *testing.T) {
+	a, b := 0, 63
+
+	expectedGCD := 63
+	var expectedErr error
+
+	actualGCD, actualErr := GCD(a, b)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGCD, actualGCD) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGCD, actualGCD)
+	}
+}

@@ -32,3 +32,24 @@ func IsPrime(value int) (bool, error) {
 
 	return true, nil
 }
+
+func GCD(a int, b int) (int, error) {
+	if a < 0 || b < 0 {
+		return 0, definitions.ErrNegativeNumber
+	}
+
+	if a == 0 {
+		return b, nil
+	}
+
+	if b == 0 {
+		return a, nil
+	}
+
+	gcd, err := GCD(b%a, a)
+	if err != nil {
+		return 0, err
+	}
+
+	return gcd, nil
+}
