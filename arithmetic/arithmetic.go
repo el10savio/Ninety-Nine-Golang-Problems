@@ -1,6 +1,8 @@
 package arithmetic
 
 import (
+	"log"
+
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
@@ -65,7 +67,7 @@ func Coprime(a int, b int) (bool, error) {
 
 func Totient(m int) (int, error) {
 	if m <= 0 {
-		return 0, definitions.ErrNegativeNumber
+		return 0, definitions.ErrNotPositiveNumber
 	}
 
 	count := 1
@@ -82,4 +84,28 @@ func Totient(m int) (int, error) {
 	}
 
 	return count, nil
+}
+
+func PrimeFactors(number int) ([]int, error) {
+	log.Println(number)
+
+	if number <= 0 {
+		return []int{}, definitions.ErrNotPositiveNumber
+	}
+
+	if number <= 3 {
+		return []int{number}, nil
+	}
+
+	sieve := definitions.SieveOfEratosthenes(number)
+	log.Println(sieve)
+	primeFactors := make([]int, 0)
+
+	for index := 1; index < len(sieve); index++ {
+		if number%sieve[index] == 0 {
+			primeFactors = append(primeFactors, sieve[index])
+		}
+	}
+
+	return primeFactors, nil
 }

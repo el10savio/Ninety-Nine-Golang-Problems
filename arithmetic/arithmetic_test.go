@@ -1,6 +1,7 @@
 package arithmetic
 
 import (
+	"log"
 	"reflect"
 	"testing"
 
@@ -187,9 +188,9 @@ func TestTotient(t *testing.T) {
 
 	var expectedErr error
 
-	for i := 0; i < len(Ms); i++ {
-		m := Ms[i]
-		expectedTotient := expectedTotients[i]
+	for index := 0; index < len(Ms); index++ {
+		m := Ms[index]
+		expectedTotient := expectedTotients[index]
 
 		actualTotient, actualErr := Totient(m)
 
@@ -207,7 +208,7 @@ func TestTotient_NegativeM(t *testing.T) {
 	m := -10
 
 	expectedTotient := 0
-	expectedErr := definitions.ErrNegativeNumber
+	expectedErr := definitions.ErrNotPositiveNumber
 
 	actualTotient, actualErr := Totient(m)
 
@@ -224,7 +225,7 @@ func TestTotient_ZeroM(t *testing.T) {
 	m := 0
 
 	expectedTotient := 0
-	expectedErr := definitions.ErrNegativeNumber
+	expectedErr := definitions.ErrNotPositiveNumber
 
 	actualTotient, actualErr := Totient(m)
 
@@ -234,5 +235,29 @@ func TestTotient_ZeroM(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedTotient, actualTotient) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotient, actualTotient)
+	}
+}
+
+func TestPrimeFactors(t *testing.T) {
+	Numbers := []int{2, 33, 68, 97, 177}
+	expectedPrimeFactorsList := [][]int{{2}, {3, 11}, {2, 2, 17}, {97}, {3, 59}}
+
+	var expectedErr error
+
+	for index := 0; index < len(Numbers); index++ {
+		Number := Numbers[index]
+		expectedPrimeFactors := expectedPrimeFactorsList[index]
+
+		log.Println(Number, expectedPrimeFactors)
+
+		actualPrimeFactors, actualErr := PrimeFactors(Number)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedPrimeFactors, actualPrimeFactors) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimeFactors, actualPrimeFactors)
+		}
 	}
 }
