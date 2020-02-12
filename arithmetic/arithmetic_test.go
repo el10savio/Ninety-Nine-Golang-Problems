@@ -1,7 +1,6 @@
 package arithmetic
 
 import (
-	"log"
 	"reflect"
 	"testing"
 
@@ -248,7 +247,44 @@ func TestPrimeFactors(t *testing.T) {
 		Number := Numbers[index]
 		expectedPrimeFactors := expectedPrimeFactorsList[index]
 
-		log.Println(Number, expectedPrimeFactors)
+		actualPrimeFactors, actualErr := PrimeFactors(Number)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedPrimeFactors, actualPrimeFactors) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimeFactors, actualPrimeFactors)
+		}
+	}
+}
+
+func TestPrimeFactors_NegativeNumber(t *testing.T) {
+	Number := -17
+
+	expectedPrimeFactors := []int{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualPrimeFactors, actualErr := PrimeFactors(Number)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPrimeFactors, actualPrimeFactors) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimeFactors, actualPrimeFactors)
+	}
+}
+
+func TestPrimeFactors_OneTwoThree(t *testing.T) {
+	Numbers := []int{1, 2, 3}
+	expectedPrimeFactorsList := [][]int{{1}, {2}, {3}}
+
+	var expectedErr error
+
+	for index := 0; index < len(Numbers); index++ {
+		Number := Numbers[index]
+		expectedPrimeFactors := expectedPrimeFactorsList[index]
 
 		actualPrimeFactors, actualErr := PrimeFactors(Number)
 

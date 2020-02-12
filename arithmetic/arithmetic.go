@@ -1,8 +1,6 @@
 package arithmetic
 
 import (
-	"log"
-
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
@@ -87,8 +85,6 @@ func Totient(m int) (int, error) {
 }
 
 func PrimeFactors(number int) ([]int, error) {
-	log.Println(number)
-
 	if number <= 0 {
 		return []int{}, definitions.ErrNotPositiveNumber
 	}
@@ -98,12 +94,13 @@ func PrimeFactors(number int) ([]int, error) {
 	}
 
 	sieve := definitions.SieveOfEratosthenes(number)
-	log.Println(sieve)
 	primeFactors := make([]int, 0)
 
-	for index := 1; index < len(sieve); index++ {
+	for index := 0; index < len(sieve); index++ {
 		if number%sieve[index] == 0 {
 			primeFactors = append(primeFactors, sieve[index])
+			number = number / sieve[index]
+			index = -1
 		}
 	}
 
