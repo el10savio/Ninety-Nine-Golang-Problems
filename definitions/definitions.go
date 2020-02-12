@@ -64,23 +64,28 @@ func MillerTest(d int, value int) bool {
 }
 
 func SieveOfEratosthenes(maxN int) []int {
-	sieve := make([]bool, maxN+1)
+	if maxN <= 1 {
+		return []int{}
+	}
 
-	for i := 1; i < maxN+1; i++ {
+	maxN++
+	sieve := make([]bool, maxN)
+
+	for i := 1; i < maxN; i++ {
 		sieve[i] = true
 	}
 
-	for i := 2; i <= int(math.Sqrt(float64(maxN+1))); i++ {
-		if sieve[i] == true {
-			for j := i * 2; j <= maxN+1; j += i {
+	for i := 2; i <= int(math.Sqrt(float64(maxN))); i++ {
+		if sieve[i] {
+			for j := i * 2; j < maxN; j += i {
 				sieve[j] = false
 			}
 		}
 	}
 
 	primeList := make([]int, 0)
-	for i := 0; i < maxN+1; i++ {
-		if sieve[i] == true {
+	for i := 2; i < maxN; i++ {
+		if sieve[i] {
 			primeList = append(primeList, i)
 		}
 	}
