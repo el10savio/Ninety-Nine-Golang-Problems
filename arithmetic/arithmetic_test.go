@@ -77,23 +77,6 @@ func TestIsPrime_OneTwoThree(t *testing.T) {
 	}
 }
 
-func TestIsPrime_Four(t *testing.T) {
-	number := 4
-
-	expectedIsPrime := false
-	var expectedErr error
-
-	actualIsPrime, actualErr := IsPrime(number)
-
-	if !reflect.DeepEqual(expectedErr, actualErr) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
-	}
-
-	if !reflect.DeepEqual(expectedIsPrime, actualIsPrime) {
-		t.Fatalf("Expected: %v\n Actual: %v\n", expectedIsPrime, actualIsPrime)
-	}
-}
-
 func TestGCD(t *testing.T) {
 	a, b := 36, 63
 	// 98, 56 => 14

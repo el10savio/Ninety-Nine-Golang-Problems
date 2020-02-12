@@ -13,24 +13,15 @@ func IsPrime(value int) (bool, error) {
 		return true, nil
 	}
 
-	if value == 4 {
-		return false, nil
-	}
+	sieve := definitions.SieveOfEratosthenes(value)
 
-	// n = 2^d * r + 1 for some r >= 1
-	d := value - 1
-	for d%2 == 0 {
-		d = d / 2
-	}
-
-	retries := 4
-	for i := 0; i < retries; i++ {
-		if definitions.MillerTest(d, value) == false {
-			return false, nil
+	for _, prime := range sieve {
+		if value == prime {
+			return true, nil
 		}
 	}
 
-	return true, nil
+	return false, nil
 }
 
 func GCD(a int, b int) (int, error) {
