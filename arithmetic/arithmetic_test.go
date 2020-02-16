@@ -341,3 +341,59 @@ func TestPrimeFactorsMult_OneTwoThree(t *testing.T) {
 		}
 	}
 }
+
+func TestTotientImproved(t *testing.T) {
+	Ms := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	expectedTotientsImproved := []int{1, 1, 2, 2, 4, 2, 6, 4, 6, 4}
+
+	var expectedErr error
+
+	for index := 0; index < len(Ms); index++ {
+		m := Ms[index]
+		expectedTotientImproved := expectedTotientsImproved[index]
+
+		actualTotientImproved, actualErr := Totient(m)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedTotientImproved, actualTotientImproved) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotientImproved, actualTotientImproved)
+		}
+	}
+}
+
+func TestTotientImproved_NegativeM(t *testing.T) {
+	m := -10
+
+	expectedTotientImproved := 0
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualTotientImproved, actualErr := Totient(m)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedTotientImproved, actualTotientImproved) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotientImproved, actualTotientImproved)
+	}
+}
+
+func TestTotientImproved_ZeroM(t *testing.T) {
+	m := 0
+
+	expectedTotientImproved := 0
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualTotientImproved, actualErr := Totient(m)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedTotientImproved, actualTotientImproved) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotientImproved, actualTotientImproved)
+	}
+}

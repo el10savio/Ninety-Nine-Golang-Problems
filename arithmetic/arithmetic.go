@@ -1,6 +1,8 @@
 package arithmetic
 
 import (
+	"math"
+
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
@@ -113,12 +115,13 @@ func PrimeFactorsMult(number int) ([][]int, error) {
 	previousPrimeFactor := primeFactors[0]
 	mult := 1
 
-	if len(primeFactors) == 1 {
+	lenPrimeFactors := len(primeFactors)
+	if lenPrimeFactors == 1 {
 		primeFactorsMult = append(primeFactorsMult, []int{previousPrimeFactor, mult})
 		return primeFactorsMult, nil
 	}
 
-	for index := 1; index < len(primeFactors); index++ {
+	for index := 1; index < lenPrimeFactors; index++ {
 		if previousPrimeFactor != primeFactors[index] {
 			primeFactorsMult = append(primeFactorsMult, []int{previousPrimeFactor, mult})
 			previousPrimeFactor = primeFactors[index]
@@ -130,4 +133,25 @@ func PrimeFactorsMult(number int) ([][]int, error) {
 	primeFactorsMult = append(primeFactorsMult, []int{previousPrimeFactor, mult})
 
 	return primeFactorsMult, nil
+}
+
+func TotientImproved(m int) (int, error) {
+	if m <= 0 {
+		return 0, definitions.ErrNotPositiveNumber
+	}
+
+	primeFactorsMult, err := PrimeFactorsMult(m)
+	if err != nil {
+		return 0, err
+	}
+
+	totientImproved := 1
+
+	for index := 0; index < len(primeFactorsMult); index++ {
+		primeFactor := float64(primeFactorsMult[index][0])
+		mult := float64(primeFactorsMult[index][1])
+		totientImproved *= int(math.Pow(primeFactor*(primeFactor-1), mult-1))
+	}
+
+	return totientImproved, nil
 }
