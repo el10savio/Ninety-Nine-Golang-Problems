@@ -280,3 +280,25 @@ func TestPrimeFactors_OneTwoThree(t *testing.T) {
 		}
 	}
 }
+
+func TestPrimeFactorsMult(t *testing.T) {
+	Numbers := []int{2, 33, 68, 97, 177, 315}
+	expectedPrimeFactorsMultList := [][][]int{{{2, 1}}, {{3, 1}, {11, 1}}, {{2, 2}, {17, 1}}, {{97, 1}}, {{3, 1}, {59, 1}}, {{3, 2}, {5, 1}, {7, 1}}}
+
+	var expectedErr error
+
+	for index := 0; index < len(Numbers); index++ {
+		Number := Numbers[index]
+		expectedPrimeFactorsMult := expectedPrimeFactorsMultList[index]
+
+		actualPrimeFactorsMult, actualErr := PrimeFactorsMult(Number)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedPrimeFactorsMult, actualPrimeFactorsMult) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimeFactorsMult, actualPrimeFactorsMult)
+		}
+	}
+}

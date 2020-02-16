@@ -97,3 +97,37 @@ func PrimeFactors(number int) ([]int, error) {
 
 	return primeFactors, nil
 }
+
+func PrimeFactorsMult(number int) ([][]int, error) {
+	if number <= 0 {
+		return [][]int{}, definitions.ErrNotPositiveNumber
+	}
+
+	primeFactors, err := PrimeFactors(number)
+	if err != nil {
+		return [][]int{}, err
+	}
+
+	primeFactorsMult := make([][]int, 0)
+
+	previousPrimeFactor := primeFactors[0]
+	mult := 1
+
+	if len(primeFactors) == 1 {
+		primeFactorsMult = append(primeFactorsMult, []int{previousPrimeFactor, mult})
+		return primeFactorsMult, nil
+	}
+
+	for index := 1; index < len(primeFactors); index++ {
+		if previousPrimeFactor != primeFactors[index] {
+			primeFactorsMult = append(primeFactorsMult, []int{previousPrimeFactor, mult})
+			previousPrimeFactor = primeFactors[index]
+			mult = 1
+		} else {
+			mult++
+		}
+	}
+	primeFactorsMult = append(primeFactorsMult, []int{previousPrimeFactor, mult})
+
+	return primeFactorsMult, nil
+}
