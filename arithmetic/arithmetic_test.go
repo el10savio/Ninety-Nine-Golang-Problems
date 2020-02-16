@@ -302,3 +302,42 @@ func TestPrimeFactorsMult(t *testing.T) {
 		}
 	}
 }
+
+func TestPrimeFactorsMult_NegativeNumber(t *testing.T) {
+	Number := -17
+
+	expectedPrimeFactorsMult := [][]int{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualPrimeFactorsMult, actualErr := PrimeFactorsMult(Number)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPrimeFactorsMult, actualPrimeFactorsMult) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimeFactorsMult, actualPrimeFactorsMult)
+	}
+}
+
+func TestPrimeFactorsMult_OneTwoThree(t *testing.T) {
+	Numbers := []int{1, 2, 3}
+	expectedPrimeFactorsMultList := [][][]int{{{1, 1}}, {{2, 1}}, {{3, 1}}}
+
+	var expectedErr error
+
+	for index := 0; index < len(Numbers); index++ {
+		Number := Numbers[index]
+		expectedPrimeFactorsMult := expectedPrimeFactorsMultList[index]
+
+		actualPrimeFactorsMult, actualErr := PrimeFactorsMult(Number)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedPrimeFactorsMult, actualPrimeFactorsMult) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimeFactorsMult, actualPrimeFactorsMult)
+		}
+	}
+}
