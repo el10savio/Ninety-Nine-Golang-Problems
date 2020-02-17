@@ -155,3 +155,8 @@ func TotientImproved(m int) (int, error) {
 
 	return totientImproved, nil
 }
+
+// goos: linux
+// goarch: amd64
+// BenchmarkTotient10090-4           	     650	   1832848 ns/op
+// BenchmarkTotientImproved10090-4   	   18412	     68079 ns/op

@@ -397,3 +397,15 @@ func TestTotientImproved_ZeroM(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedTotientImproved, actualTotientImproved)
 	}
 }
+
+func BenchmarkTotient10090(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		Totient(10090)
+	}
+}
+
+func BenchmarkTotientImproved10090(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		TotientImproved(10090)
+	}
+}
