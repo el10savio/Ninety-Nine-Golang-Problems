@@ -169,15 +169,13 @@ func PrimesR(m int, n int) ([]int, error) {
 	pivot := m
 	end := n
 
-	primesList := make([]int, 0)
-	primesListCut := make([]int, 0)
-
 	if m > n {
 		pivot = n
 		end = m
 	}
 
-	primesList = definitions.SieveOfEratosthenes(end)
+	primesList := definitions.SieveOfEratosthenes(end)
+	primesListCut := make([]int, 0)
 
 	for _, prime := range primesList {
 		if prime >= pivot {
