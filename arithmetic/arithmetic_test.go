@@ -409,3 +409,70 @@ func BenchmarkTotientImproved10090(b *testing.B) {
 		TotientImproved(10090)
 	}
 }
+func TestPrimesR(t *testing.T) {
+	m, n := 10, 20
+
+	expectedPrimesR := []int{11, 13, 17, 19}
+	var expectedErr error
+
+	actualPrimesR, actualErr := PrimesR(m, n)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPrimesR, actualPrimesR) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimesR, actualPrimesR)
+	}
+}
+
+func TestPrimesR_ZeroIndex(t *testing.T) {
+	m, n := 10, 0
+
+	expectedPrimesR := []int{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualPrimesR, actualErr := PrimesR(m, n)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPrimesR, actualPrimesR) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimesR, actualPrimesR)
+	}
+}
+
+func TestPrimesR_NegativeIndex(t *testing.T) {
+	m, n := -10, -20
+
+	expectedPrimesR := []int{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualPrimesR, actualErr := PrimesR(m, n)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPrimesR, actualPrimesR) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimesR, actualPrimesR)
+	}
+}
+
+func TestPrimesR_MGreaterThanN(t *testing.T) {
+	m, n := 20, 10
+
+	expectedPrimesR := []int{11, 13, 17, 19}
+	var expectedErr error
+
+	actualPrimesR, actualErr := PrimesR(m, n)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedPrimesR, actualPrimesR) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimesR, actualPrimesR)
+	}
+}

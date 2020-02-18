@@ -160,3 +160,30 @@ func TotientImproved(m int) (int, error) {
 // goarch: amd64
 // BenchmarkTotient10090-4           	     650	   1832848 ns/op
 // BenchmarkTotientImproved10090-4   	   18412	     68079 ns/op
+
+func PrimesR(m int, n int) ([]int, error) {
+	if m <= 0 || n <= 0 {
+		return []int{}, definitions.ErrNotPositiveNumber
+	}
+
+	pivot := m
+	end := n
+
+	primesList := make([]int, 0)
+	primesListCut := make([]int, 0)
+
+	if m > n {
+		pivot = n
+		end = m
+	}
+
+	primesList = definitions.SieveOfEratosthenes(end)
+
+	for _, prime := range primesList {
+		if prime >= pivot {
+			primesListCut = append(primesListCut, prime)
+		}
+	}
+
+	return primesListCut, nil
+}
