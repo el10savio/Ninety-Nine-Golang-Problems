@@ -476,3 +476,63 @@ func TestPrimesR_MGreaterThanN(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedPrimesR, actualPrimesR)
 	}
 }
+
+func TestGoldbach(t *testing.T) {
+	numbers := []int{10, 14, 28, 1382, 1928}
+
+	expectedGoldbachList := [][]int{{3, 7}, {3, 11}, {5, 23}, {61, 1321}, {61, 1867}}
+	var expectedErr error
+
+	for index := 0; index < len(numbers); index++ {
+		number := numbers[index]
+		expectedGoldbach := expectedGoldbachList[index]
+
+		actualGoldbach, actualErr := Goldbach(number)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedGoldbach, actualGoldbach) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbach, actualGoldbach)
+		}
+	}
+}
+
+func TestGoldbach_Negative(t *testing.T) {
+	number := -28
+
+	expectedGoldbach := []int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	actualGoldbach, actualErr := Goldbach(number)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbach, actualGoldbach) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbach, actualGoldbach)
+	}
+}
+
+func TestGoldbach_LessThan3(t *testing.T) {
+	numbers := []int{2, 1, 0}
+
+	expectedGoldbach := []int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	for index := 0; index < len(numbers); index++ {
+		number := numbers[index]
+
+		actualGoldbach, actualErr := Goldbach(number)
+
+		if !reflect.DeepEqual(expectedErr, actualErr) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+		}
+
+		if !reflect.DeepEqual(expectedGoldbach, actualGoldbach) {
+			t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbach, actualGoldbach)
+		}
+	}
+}

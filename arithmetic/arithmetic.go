@@ -2,7 +2,6 @@ package arithmetic
 
 import (
 	"errors"
-	"log"
 	"math"
 
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
@@ -195,18 +194,25 @@ func Goldbach(number int) ([]int, error) {
 
 	primesToNumber := definitions.SieveOfEratosthenes(number)
 
-	for index := len(primesToNumber); index >= 0; index-- {
+	for index := len(primesToNumber) - 1; index >= 0; index-- {
 		prime1 := primesToNumber[index]
 		prime2 := number - prime1
 
+		if prime1 <= 1 || prime2 <= 1 {
+			continue
+		}
+
 		isPrime, err := IsPrime(prime2)
 		if err != nil {
-			log.Println(prime2, err)
 			return []int{}, errors.New("error with prime check")
 		}
 
 		if isPrime == false {
 			continue
+		}
+
+		if prime1+prime2 == number {
+			return []int{prime2, prime1}, nil
 		}
 	}
 
