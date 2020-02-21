@@ -1,7 +1,6 @@
 package arithmetic
 
 import (
-	"errors"
 	"math"
 
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
@@ -208,7 +207,7 @@ func Goldbach(number int) ([]int, error) {
 
 		isPrime, err := IsPrime(prime2)
 		if err != nil {
-			return []int{}, errors.New("error with prime check")
+			return []int{}, err
 		}
 
 		if isPrime == false {
@@ -239,7 +238,12 @@ func GoldbachList(lower int, upper int) ([][]int, error) {
 	goldbachList := make([][]int, 0)
 
 	for index := lower; index <= upper; index += 2 {
-		goldbachList = append(goldbachList, Goldbach(index))
+		goldbach, err := Goldbach(index)
+		if err != nil {
+			return [][]int{}, err
+		}
+
+		goldbachList = append(goldbachList, goldbach)
 	}
 
 	return goldbachList, nil

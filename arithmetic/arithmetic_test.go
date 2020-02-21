@@ -553,3 +553,88 @@ func TestGoldbach_Odd(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbach, actualGoldbach)
 	}
 }
+
+func TestGoldbachList(t *testing.T) {
+	lower, upper := 9, 20
+
+	expectedGoldbachList := [][]int{{3, 7}, {5, 7}, {3, 11}, {3, 13}, {5, 13}, {3, 17}}
+	var expectedErr error
+
+	actualGoldbachList, actualErr := GoldbachList(lower, upper)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachList, actualGoldbachList) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachList, actualGoldbachList)
+	}
+}
+
+func TestGoldbachList_Zero(t *testing.T) {
+	lower, upper := 9, 0
+
+	expectedGoldbachList := [][]int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	actualGoldbachList, actualErr := GoldbachList(lower, upper)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachList, actualGoldbachList) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachList, actualGoldbachList)
+	}
+}
+
+func TestGoldbachList_Negative(t *testing.T) {
+	lower, upper := 9, -20
+
+	expectedGoldbachList := [][]int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	actualGoldbachList, actualErr := GoldbachList(lower, upper)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachList, actualGoldbachList) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachList, actualGoldbachList)
+	}
+}
+
+func TestGoldbachList_LessThan3(t *testing.T) {
+	lower, upper := 9, 2
+
+	expectedGoldbachList := [][]int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	actualGoldbachList, actualErr := GoldbachList(lower, upper)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachList, actualGoldbachList) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachList, actualGoldbachList)
+	}
+}
+
+func TestGoldbachList_UpperLessThanLower(t *testing.T) {
+	lower, upper := 20, 9
+
+	expectedGoldbachList := [][]int{{3, 7}, {5, 7}, {3, 11}, {3, 13}, {5, 13}, {3, 17}}
+	var expectedErr error
+
+	actualGoldbachList, actualErr := GoldbachList(lower, upper)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachList, actualGoldbachList) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachList, actualGoldbachList)
+	}
+}
