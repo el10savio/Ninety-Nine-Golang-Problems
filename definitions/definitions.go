@@ -25,6 +25,9 @@ var (
 	// ErrLessThanTwo - Error for factor cannot be less than 3
 	ErrLessThanTwo = errors.New("factor cannot be less than 3")
 
+	// ErrOddNumber - Error for factor cannot be an odd number
+	ErrOddNumber = errors.New("factor cannot be an odd number")
+
 	// ErrZero - Error for factor cannot be 0
 	ErrZero = errors.New("factor cannot be 0")
 
