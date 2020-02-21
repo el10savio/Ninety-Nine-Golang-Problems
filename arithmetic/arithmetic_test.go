@@ -536,3 +536,20 @@ func TestGoldbach_LessThan3(t *testing.T) {
 		}
 	}
 }
+
+func TestGoldbach_Odd(t *testing.T) {
+	number := 11
+
+	expectedGoldbach := []int{}
+	expectedErr := definitions.ErrOddNumber
+
+	actualGoldbach, actualErr := Goldbach(number)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbach, actualGoldbach) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbach, actualGoldbach)
+	}
+}

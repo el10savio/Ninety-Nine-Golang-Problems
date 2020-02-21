@@ -192,6 +192,10 @@ func Goldbach(number int) ([]int, error) {
 		return []int{}, definitions.ErrAtLeastTwo
 	}
 
+	if number%2 != 0 {
+		return []int{}, definitions.ErrOddNumber
+	}
+
 	primesToNumber := definitions.SieveOfEratosthenes(number)
 
 	for index := len(primesToNumber) - 1; index >= 0; index-- {
@@ -217,4 +221,26 @@ func Goldbach(number int) ([]int, error) {
 	}
 
 	return []int{}, nil
+}
+
+func GoldbachList(lower int, upper int) ([][]int, error) {
+	if lower <= 2 || upper <= 2 {
+		return [][]int{}, definitions.ErrAtLeastTwo
+	}
+
+	if upper < lower {
+		upper, lower = lower, upper
+	}
+
+	if lower%2 != 0 {
+		lower++
+	}
+
+	goldbachList := make([][]int, 0)
+
+	for index := lower; index <= upper; index += 2 {
+		goldbachList = append(goldbachList, Goldbach(index))
+	}
+
+	return goldbachList, nil
 }
