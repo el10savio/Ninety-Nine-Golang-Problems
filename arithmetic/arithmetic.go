@@ -6,6 +6,8 @@ import (
 	"github.com/el10savio/Ninety-Nine-Golang-Problems/definitions"
 )
 
+// IsPrime Problem 31
+// Determine whether a given integer number is prime.
 func IsPrime(value int) (bool, error) {
 	if value <= 0 {
 		return false, definitions.ErrNotPositiveNumber
@@ -26,6 +28,9 @@ func IsPrime(value int) (bool, error) {
 	return false, nil
 }
 
+// GCD Problem 32
+// Determine the greatest common divisor of two
+// positive integer numbers.
 func GCD(a int, b int) (int, error) {
 	if a < 0 || b < 0 {
 		return 0, definitions.ErrNegativeNumber
@@ -47,6 +52,9 @@ func GCD(a int, b int) (int, error) {
 	return gcd, nil
 }
 
+// Coprime Problem 33
+// Determine whether two positive integer
+// numbers are coprime.
 func Coprime(a int, b int) (bool, error) {
 	gcd, err := GCD(b%a, a)
 	if err != nil {
@@ -56,6 +64,8 @@ func Coprime(a int, b int) (bool, error) {
 	return gcd == 1, nil
 }
 
+// Totient Problem 34
+// Calculate Euler's totient function phi(m).
 func Totient(m int) (int, error) {
 	if m <= 0 {
 		return 0, definitions.ErrNotPositiveNumber
@@ -77,6 +87,9 @@ func Totient(m int) (int, error) {
 	return count, nil
 }
 
+// PrimeFactors Problem 35
+// Determine the prime factors of a
+// given positive integer.
 func PrimeFactors(number int) ([]int, error) {
 	if number <= 0 {
 		return []int{}, definitions.ErrNotPositiveNumber
@@ -100,6 +113,9 @@ func PrimeFactors(number int) ([]int, error) {
 	return primeFactors, nil
 }
 
+// PrimeFactorsMult Problem 36
+// Determine the prime factors of a
+// given positive integer.
 func PrimeFactorsMult(number int) ([][]int, error) {
 	if number <= 0 {
 		return [][]int{}, definitions.ErrNotPositiveNumber
@@ -135,6 +151,9 @@ func PrimeFactorsMult(number int) ([][]int, error) {
 	return primeFactorsMult, nil
 }
 
+// TotientImproved Problem 37
+// Calculate Euler's totient
+// function phi(m) (improved).
 func TotientImproved(m int) (int, error) {
 	if m <= 0 {
 		return 0, definitions.ErrNotPositiveNumber
@@ -156,11 +175,20 @@ func TotientImproved(m int) (int, error) {
 	return totientImproved, nil
 }
 
+// Problem 38
+// Compare the two methods of calculating
+// Euler's totient function.
+// BenchmarkTotient10090
+// BenchmarkTotientImproved10090
 // goos: linux
 // goarch: amd64
 // BenchmarkTotient10090-4           	     650	   1832848 ns/op
 // BenchmarkTotientImproved10090-4   	   18412	     68079 ns/op
 
+// PrimesR Problem 39
+// Given a range of integers by its lower and
+// upper limit, construct a list of all
+// prime numbers in that range.
 func PrimesR(m int, n int) ([]int, error) {
 	if m <= 0 || n <= 0 {
 		return []int{}, definitions.ErrNotPositiveNumber
@@ -186,6 +214,8 @@ func PrimesR(m int, n int) ([]int, error) {
 	return primesListCut, nil
 }
 
+// Goldbach Problem 40
+// Goldbach's conjecture.
 func Goldbach(number int) ([]int, error) {
 	if number <= 2 {
 		return []int{}, definitions.ErrAtLeastTwo
@@ -222,6 +252,11 @@ func Goldbach(number int) ([]int, error) {
 	return []int{}, nil
 }
 
+// GoldbachList Problem 41
+// Given a range of integers by its lower
+// and upper limit, print a list of all
+// even numbers and their
+// Goldbach composition.
 func GoldbachList(lower int, upper int) ([][]int, error) {
 	if lower <= 2 || upper <= 2 {
 		return [][]int{}, definitions.ErrAtLeastTwo
@@ -249,6 +284,9 @@ func GoldbachList(lower int, upper int) ([][]int, error) {
 	return goldbachListLarge, nil
 }
 
+// GoldbachListLarge Problem 41 II
+// Find out how many such cases there are in a
+// range that are both greater than a value.
 func GoldbachListLarge(lower int, upper int, value int) ([][]int, error) {
 	if value <= 0 {
 		return [][]int{}, definitions.ErrNotPositiveNumber
