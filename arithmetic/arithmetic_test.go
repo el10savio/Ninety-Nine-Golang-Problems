@@ -638,3 +638,93 @@ func TestGoldbachList_UpperLessThanLower(t *testing.T) {
 		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachList, actualGoldbachList)
 	}
 }
+
+func TestGoldbachListLarge(t *testing.T) {
+	lower, upper := 4, 2000
+	value := 50
+
+	expectedGoldbachListLarge := [][]int{{73, 919}, {61, 1321}, {67, 1789}, {61, 1867}}
+	var expectedErr error
+
+	actualGoldbachListLarge, actualErr := GoldbachListLarge(lower, upper, value)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachListLarge, actualGoldbachListLarge) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachListLarge, actualGoldbachListLarge)
+	}
+}
+
+func TestGoldbachListLarge_ZeroIndex(t *testing.T) {
+	lower, upper := 4, 0
+	value := 50
+
+	expectedGoldbachListLarge := [][]int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	actualGoldbachListLarge, actualErr := GoldbachListLarge(lower, upper, value)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachListLarge, actualGoldbachListLarge) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachListLarge, actualGoldbachListLarge)
+	}
+}
+
+func TestGoldbachListLarge_LessThan3(t *testing.T) {
+	lower, upper := 2, 2000
+	value := 50
+
+	expectedGoldbachListLarge := [][]int{}
+	expectedErr := definitions.ErrAtLeastTwo
+
+	actualGoldbachListLarge, actualErr := GoldbachListLarge(lower, upper, value)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachListLarge, actualGoldbachListLarge) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachListLarge, actualGoldbachListLarge)
+	}
+}
+
+func TestGoldbachListLarge_UpperLessThanLower(t *testing.T) {
+	lower, upper := 2000, 4
+	value := 50
+
+	expectedGoldbachListLarge := [][]int{{73, 919}, {61, 1321}, {67, 1789}, {61, 1867}}
+	var expectedErr error
+
+	actualGoldbachListLarge, actualErr := GoldbachListLarge(lower, upper, value)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachListLarge, actualGoldbachListLarge) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachListLarge, actualGoldbachListLarge)
+	}
+}
+
+func TestGoldbachListLarge_ZeroValue(t *testing.T) {
+	lower, upper := 4, 2000
+	value := 0
+
+	expectedGoldbachListLarge := [][]int{}
+	expectedErr := definitions.ErrNotPositiveNumber
+
+	actualGoldbachListLarge, actualErr := GoldbachListLarge(lower, upper, value)
+
+	if !reflect.DeepEqual(expectedErr, actualErr) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedErr, actualErr)
+	}
+
+	if !reflect.DeepEqual(expectedGoldbachListLarge, actualGoldbachListLarge) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedGoldbachListLarge, actualGoldbachListLarge)
+	}
+}

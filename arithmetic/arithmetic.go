@@ -235,7 +235,7 @@ func GoldbachList(lower int, upper int) ([][]int, error) {
 		lower++
 	}
 
-	goldbachList := make([][]int, 0)
+	goldbachListLarge := make([][]int, 0)
 
 	for index := lower; index <= upper; index += 2 {
 		goldbach, err := Goldbach(index)
@@ -243,8 +243,41 @@ func GoldbachList(lower int, upper int) ([][]int, error) {
 			return [][]int{}, err
 		}
 
-		goldbachList = append(goldbachList, goldbach)
+		goldbachListLarge = append(goldbachListLarge, goldbach)
 	}
 
-	return goldbachList, nil
+	return goldbachListLarge, nil
+}
+
+func GoldbachListLarge(lower int, upper int, value int) ([][]int, error) {
+	if value <= 0 {
+		return [][]int{}, definitions.ErrNotPositiveNumber
+	}
+
+	if lower <= 2 || upper <= 2 {
+		return [][]int{}, definitions.ErrAtLeastTwo
+	}
+
+	if upper < lower {
+		upper, lower = lower, upper
+	}
+
+	if lower%2 != 0 {
+		lower++
+	}
+
+	goldbachListLarge := make([][]int, 0)
+
+	for index := lower; index <= upper; index += 2 {
+		goldbach, err := Goldbach(index)
+		if err != nil {
+			return [][]int{}, err
+		}
+
+		if goldbach[0] >= value && goldbach[1] >= value {
+			goldbachListLarge = append(goldbachListLarge, goldbach)
+		}
+	}
+
+	return goldbachListLarge, nil
 }
