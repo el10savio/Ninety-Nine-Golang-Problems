@@ -1,13 +1,23 @@
 package parser
 
-import "strings"
+import (
+	"strings"
+)
+
+type ParseTree struct {
+	operator string
+	left     *ParseTree
+	right    *ParseTree
+}
 
 func Words(sentence string) []string {
+	sentence = strings.ReplaceAll(sentence, "(", " ( ")
+	sentence = strings.ReplaceAll(sentence, ")", " ) ")
+
+	sentence = strings.ReplaceAll(sentence, "  ", " ")
 	sentence = strings.Trim(sentence, " ")
 
-	sentence = strings.ReplaceAll(sentence, "(", "( ")
-	sentence = strings.ReplaceAll(sentence, ")", " )")
-
 	words := strings.Split(sentence, " ")
+
 	return words
 }

@@ -1,11 +1,18 @@
 package parser
 
 import (
-	"log"
+	"reflect"
 	"testing"
 )
 
 func TestWords(t *testing.T) {
 	sentence := "and a (or a b)"
-	log.Println(Words(sentence))
+
+	expectedWords := []string{"and", "a", "(", "or", "a", "b", ")"}
+
+	actualWords := Words(sentence)
+
+	if !reflect.DeepEqual(expectedWords, actualWords) {
+		t.Fatalf("Expected: %v\n Actual: %v\n", expectedWords, actualWords)
+	}
 }
