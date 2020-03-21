@@ -1,8 +1,6 @@
 package parser
 
 import (
-	"log"
-
 	lexer "github.com/el10savio/Ninety-Nine-Golang-Problems/logicandcodes/parser/lexer"
 )
 
@@ -13,10 +11,8 @@ type ParseTree struct {
 }
 
 var (
-	operatorList = []string{
-		"and",
-		"or",
-	}
+	operatorList    = []string{"and", "or"}
+	punctuationList = []string{"(", ")"}
 )
 
 func Parser(text string) ParseTree {
@@ -26,7 +22,6 @@ func Parser(text string) ParseTree {
 
 	var tree ParseTree
 	words := lexer.Lexer(text)
-	log.Println(words)
 
 	for _, word := range words {
 		tree.Type = "variable"
