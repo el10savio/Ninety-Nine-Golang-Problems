@@ -1,17 +1,16 @@
 package lexer
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-type TestCase struct {
+type testCase struct {
 	text  string
 	words []string
 }
 
-var TestCases = []TestCase{
+var testCases = []testCase{
 	{
 		text:  "",
 		words: []string{},
@@ -43,8 +42,10 @@ var TestCases = []TestCase{
 }
 
 func TestLexer(t *testing.T) {
-	for _, TestCase := range TestCases {
-		actualWords := Lexer(TestCase.text)
-		assert.Equal(t, actualWords, TestCase.words)
+	for _, testCase := range testCases {
+		actualWords := Lexer(testCase.text)
+		if !reflect.DeepEqual(actualWords, testCase.words) {
+			t.Fatalf("\nExpected: %v \nActual: %v", actualWords, testCase.words)
+		}
 	}
 }
