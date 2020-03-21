@@ -7,7 +7,7 @@ import (
 type ParseTree struct {
 	Type     string
 	Element  string
-	Children []ParseTree
+	Children []*ParseTree
 }
 
 var (
@@ -24,14 +24,15 @@ func Parser(text string) ParseTree {
 	words := lexer.Lexer(text)
 
 	for _, word := range words {
-		tree.Type = "variable"
+		tree.Element = word
 
-		if isOperator(word) {
-			tree.Type = "operator"
+		if !isOperator(word) {
+			tree.Type = "variable"
+			continue
 		}
 
-		tree.Element = word
-		tree.Children = []ParseTree{}
+		tree.Type = "operator"
+		tree.Children = []*ParseTree{}
 	}
 
 	return tree
