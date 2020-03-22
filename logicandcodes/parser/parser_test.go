@@ -20,7 +20,7 @@ var testCases = []testCase{
 		tree: ParseTree{
 			Type:     "variable",
 			Element:  "a",
-			Children: []*ParseTree{},
+			Children: []ParseTree{},
 		},
 	},
 	{
@@ -28,7 +28,26 @@ var testCases = []testCase{
 		tree: ParseTree{
 			Type:     "operator",
 			Element:  "and",
-			Children: []*ParseTree{},
+			Children: []ParseTree{},
+		},
+	},
+	{
+		text: "AND A B",
+		tree: ParseTree{
+			Type:    "operator",
+			Element: "and",
+			Children: []ParseTree{
+				ParseTree{
+					Type:     "variable",
+					Element:  "a",
+					Children: []ParseTree{},
+				},
+				ParseTree{
+					Type:     "variable",
+					Element:  "b",
+					Children: []ParseTree{},
+				},
+			},
 		},
 	},
 }
