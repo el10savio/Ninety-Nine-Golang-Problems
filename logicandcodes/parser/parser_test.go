@@ -20,7 +20,7 @@ var testCases = []testCase{
 		tree: ParseTree{
 			Type:     "variable",
 			Element:  "a",
-			Children: []ParseTree{},
+			Children: []*ParseTree{},
 		},
 	},
 	{
@@ -28,16 +28,16 @@ var testCases = []testCase{
 		tree: ParseTree{
 			Type:     "operator",
 			Element:  "and",
-			Children: []ParseTree{},
+			Children: []*ParseTree{},
 		},
 	},
 }
 
 func TestLexer(t *testing.T) {
 	for _, testCase := range testCases {
-		actualtree := Parser(testCase.text)
-		if !reflect.DeepEqual(testCase.tree, actualtree) {
-			t.Fatalf("\nExpected: %v \nActual: %v", testCase.tree, actualtree)
+		actualTree := Parser(testCase.text)
+		if !reflect.DeepEqual(testCase.tree, actualTree) {
+			t.Fatalf("\nExpected: %v \nActual: %v", testCase.tree, actualTree)
 		}
 	}
 }

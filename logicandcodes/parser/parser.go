@@ -25,6 +25,7 @@ func Parser(text string) ParseTree {
 
 	for _, word := range words {
 		tree.Element = word
+		tree.Children = []*ParseTree{}
 
 		if !isOperator(word) {
 			tree.Type = "variable"
@@ -32,7 +33,6 @@ func Parser(text string) ParseTree {
 		}
 
 		tree.Type = "operator"
-		tree.Children = []*ParseTree{}
 	}
 
 	return tree
