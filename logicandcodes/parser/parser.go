@@ -31,25 +31,32 @@ func generateTree(words []string) (tree ParseTree) {
 		return
 	}
 
-	tree.Type = "operator"
-	tree.Element = words[0]
-	tree.Children = []ParseTree{}
+	tree = generateNode(words[0])
+	node := make([]ParseTree, 0)
 
-	if !isOperator(words[0]) {
-		tree.Type = "variable"
-	}
-
-	for _, word := range words[1:] {
-		if !isOperator(word) {
-			tree.Children = append(tree.Children, generateNode(word))
+	for index, word := range words[1:] {
+		if isPunctuation(word) {
+			continue
 		}
+
+		if isOperator(word) {
+			node = append(node, generateTree(words[index+1:]))
+			break
+		}
+
+		node = append(node, generateNode(word))
 	}
 
+	tree.Children = node
 	return
 }
 
 func generateNode(word string) (node ParseTree) {
 	if len(word) <= 0 {
+		return
+	}
+
+	if isPunctuation(word) {
 		return
 	}
 
@@ -67,6 +74,15 @@ func generateNode(word string) (node ParseTree) {
 func isOperator(value string) bool {
 	for _, operator := range operatorList {
 		if value == operator {
+			return true
+		}
+	}
+	return false
+}
+
+func isPunctuation(value string) bool {
+	for _, punctuation := range punctuationList {
+		if value == punctuation {
 			return true
 		}
 	}
