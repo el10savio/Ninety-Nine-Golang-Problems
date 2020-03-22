@@ -35,13 +35,12 @@ func generateTree(words []string) (tree ParseTree) {
 	tree.Element = words[0]
 	tree.Children = []ParseTree{}
 
-	if isOperator(words[0]) {
+	if !isOperator(words[0]) {
 		tree.Type = "variable"
 	}
 
 	for _, word := range words[1:] {
-		if isOperator(word) {
-			tree.Type = "variable"
+		if !isOperator(word) {
 			tree.Children = append(tree.Children, generateNode(word))
 		}
 	}
