@@ -174,9 +174,11 @@ var testCases = []testCase{
 
 func TestParser(t *testing.T) {
 	for _, testCase := range testCases {
-		actualTree := Parser(testCase.text)
-		if !reflect.DeepEqual(testCase.tree, actualTree) {
-			t.Fatalf("\nExpected: %v \nActual: %v", testCase.tree, actualTree)
-		}
+		t.Run("", func(t *testing.T) {
+			actualTree := Parser(testCase.text)
+			if !reflect.DeepEqual(testCase.tree, actualTree) {
+				t.Fatalf("\nExpected: %v \nActual: %v", testCase.tree, actualTree)
+			}
+		})
 	}
 }

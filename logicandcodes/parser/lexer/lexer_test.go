@@ -43,9 +43,11 @@ var testCases = []testCase{
 
 func TestLexer(t *testing.T) {
 	for _, testCase := range testCases {
-		actualWords := Lexer(testCase.text)
-		if !reflect.DeepEqual(testCase.words, actualWords) {
-			t.Fatalf("\nExpected: %v \nActual: %v", testCase.words, actualWords)
-		}
+		t.Run("", func(t *testing.T) {
+			actualWords := Lexer(testCase.text)
+			if !reflect.DeepEqual(testCase.words, actualWords) {
+				t.Fatalf("\nExpected: %v \nActual: %v", testCase.words, actualWords)
+			}
+		})
 	}
 }
